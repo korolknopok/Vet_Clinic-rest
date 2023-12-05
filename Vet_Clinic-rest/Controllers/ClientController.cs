@@ -62,16 +62,15 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "User Created" });
         }
 
-        /*[HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var client = GetById(id);
+            var client = await _clients.Clients.FindAsync(id);
 
             _clients.Clients.Remove(client);
             _clients.SaveChanges();
 
             return Ok(new { Message = "User Deleted" });
-
-        }*/
+        }
     }
 }
