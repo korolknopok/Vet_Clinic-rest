@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fff;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+.wrapper {
+    width: 1920x;
+    margin: 40px 40px;
+    margin-left: 0;
+}
+
+.flex-container {
+    font-size: 22px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    
+}
+
+.flex-items {
+    margin-right: 30px;
+    font-weight: 100;
+    
+    display: flex;
+    color: #151818;
+    cursor: pointer;
+    transition: opacity 500ms ease;
+}
+
+.flex-items:hover {
+    opacity: 0.5;
+}
+
+.flex-navigation{
+    color: #151818;
+    margin-right: 30px;
+}
+
+.flex-navigation item-4 {
+    float: right;
+    color:#00c21a;
+    transform: scale(2);
+}
+
+.styleIcons {
+    font-size: 20px;
+    color: rgb(19, 218, 191);
+    cursor: pointer;
+}
+
+.logo {
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 25px;
+    display: flex;
+    align-items: flex-end;
+    
+    font-weight: 600;
+    font-size:35px;
+    color: rgb(19, 218, 191);
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.logo div {
+    height: 39px;
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.blockright {
+    height: 100%;
+    width:40%;
+    display: inline-block;
+    
+}
+
+.presentation {
+
+    width: 60%;
+    height: 100%;
+    display: inline-flex;
+}
+
+.presentation > img {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.content{
+    display: flex;
+    min-height: 500px;
+    align-items: flex-end;
+    
+}
+
+
+
+.header {
+    
+    height: 50px;
+    
+}
+.headerleft {
+    
+    height: 50px;
+    display: inline-flex;
+    position: relative;
+    float: left;
+    align-items: flex-end;
+}
+
+.headerright {
+    display: inline-flex;
+    position: relative;
+    float: right;
+    align-items: flex-end;
+    height: 50px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    white-space: nowrap;
+    
+}
+
+.row {
+    font-size: 25px;
+    flex-direction: row;
+    width: 100%;
+    flex: 1;
+    flex-wrap: wrap;
+    
+    
+}
+
+
+.labelmetod {
+    
+    color: #ffffff;
+    padding: 50px;
+    background-color: #fd7d7d;
+    
+    height: 4rem;
+    border-radius: 1.6rem;
+    -webkit-border-radius: 1.6rem;
+    -moz-border-radius: 1.6rem;
+    -ms-border-radius: 1.6rem;
+    -o-border-radius: 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 100%;
+    
+}
+
+.labelmetod ul {
+    color: white;
+    padding: 0 1rem;
+    background-color: rgb(182, 38, 38);
+    border-radius: 1.6rem;
+    -webkit-border-radius: 1.6rem;
+    -moz-border-radius: 1.6rem;
+    -ms-border-radius: 1.6rem;
+    -o-border-radius: 1.6rem;
+    margin-right: 10px;
+    
+}
+
+.labelvetclinic {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-size: 50px;
+    font-weight: 600;
+    
+    
+}
+
+.labeltext {
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    
+    
+}
+
+.RecordButton{
+    background-color: rgb(19, 218, 191);
+    margin-top: 40px;
+    height: 4rem;
+    padding: 0 1rem;
+    border-radius: 1.6rem;
+    -webkit-border-radius: 2.2rem;
+    -moz-border-radius: 2.2rem;
+    -ms-border-radius: 2.2rem;
+    -o-border-radius: 2.2rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 4rem;
+    font-size: 1rem;
+    line-height: 100%;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 500ms ease;
+    
+}
+
+.RecordButton:hover{
+    transform: scale(1.1);
+    
+}
+
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(3, 3, 3, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 1s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal_content {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    transform: scale(0.5);
+    transition: 0.4s all;
+}
+
+.modal_content.active {
+    transform: scale(1);
+}
+
+.conteiner {
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: white
+}
+    
+.form{
+    width: 275px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+       
+}
+    
+.input{
+    width: 260px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#btn{
+    margin-bottom: 10px;
+    width: 260px;
+    height: 28px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 10px;
+}
+#btn:hover{
+    background-color: green; 
+    transition: background-color .8s linear;
+}
+    
+.ActiveButton {
+    display: flex;
+    color: #151818;
+    cursor: pointer;
+    transition: opacity 500ms ease;
+}
+
+.ActiveButton:hover {
+    opacity: 0.5;
+}
+
+#button-group > input {
+    display: none;
+}
+
+#button-group > label {
+    padding: 5px;
+    background-color: transparent;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#button-group > label:hover {
+    background-color: #EBEBEB ;
+}
+
+#button-group > label:active {
+    background-color: #05eeee;
+}
+
+#button-group > input[type='radio']:checked + label{
+    background-color: #03dfba;
+    color: white
+}
+
+
+/* .a {
+    color: darkgoldenrod
+}
+
+.bottom a:visited, a.focus, a:hover {
+    font-weight: bold;
+    background: var(--black-150);
+    color: var(--black-600);
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    background: #05eeee;
+} */
+.link {
+    color:#000000;
+    text-decoration: none;
+}
+
+.link:focus{
+    background-color: #03dfba;
+}
+.botton {
+    background-color: #03dfba;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+.item.a {
+    color: #000000;
+}
+
+.item a.active {
+    background-color: #03dfba;
+}
