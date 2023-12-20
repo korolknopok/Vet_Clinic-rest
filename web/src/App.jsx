@@ -7,11 +7,6 @@ import './css/index.css';
 import Contact from "./routes/contact.jsx";
 import {Route, Link, Routes} from 'react-router-dom';
 
-
-
-
-
-
 export default function App() {
   
 
