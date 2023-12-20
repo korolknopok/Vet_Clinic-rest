@@ -26,7 +26,14 @@ export default function Header() {
                 
               </div>
               <div className='flex-items item-2'> Отзывы </div>
-              <div className='flex-items item-3'> Ветеринары </div>
+              <div className='flex-items item-3'>
+                <div className = 'item'>
+                  <NavLink to = "/veterinarians">
+                    Ветеринары 
+                  </NavLink>  
+                </div>
+
+              </div>
               <div className='flex-items item-1'>
                 <div className = 'item'>
                   <NavLink to="/contact">

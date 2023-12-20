@@ -6,6 +6,7 @@ import Content from "./components/Content";
 import './css/index.css';
 import Contact from "./routes/contact.jsx";
 import {Route, Link, Routes} from 'react-router-dom';
+import Veterinarians from "./components/Veterinarians.jsx";
 
 export default function App() {
   
@@ -28,6 +29,7 @@ export default function App() {
       <Routes>
         
         <Route path="/" element={<Content />} />
+        <Route path="/veterinarians" element={<Veterinarians />} />
         <Route path="/contact" element={<Contact />} />
         
       </Routes>
