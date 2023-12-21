@@ -18,12 +18,12 @@ import type { RequestArgs } from "./base.ts";
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import { RequiredError } from "./base.ts";
 
-
 /**
-
+ *
  * @export
  */
 export const DUMMY_BASE_URL = 'https://localhost:7205'
+
 /**
  *
  * @throws {RequiredError}
