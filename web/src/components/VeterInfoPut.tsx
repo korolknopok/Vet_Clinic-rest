@@ -19,10 +19,10 @@ const VeterInfoPut: React.FC<IVeterinariansInfo>  = ({post}) => {
     
     var functionFromApi = VeterinariansApiFactory(); 
 
-    const [name, setName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [dateOfBirth, setDateOfBirth] = useState("");
-    const [education, setEducation] = useState("");
+    const [name, setName] = useState(post.name);
+    const [phoneNumber, setPhoneNumber] = useState(post.phoneNumber);
+    const [dateOfBirth, setDateOfBirth] = useState(post.dateOfBirth);
+    const [education, setEducation] = useState(post.education);
 
     const veterinarians: Veterinarians = {
         
