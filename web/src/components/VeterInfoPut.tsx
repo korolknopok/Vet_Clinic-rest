@@ -4,7 +4,6 @@ import { Veterinarians } from '../json/api.tsx';
 import {VeterinariansApiFactory} from '../json/api.ts';
 
 interface IVeterinariansInfo {
-    
     post: {
         id : string;
         name: string;
@@ -15,16 +14,13 @@ interface IVeterinariansInfo {
 }
 
 const VeterInfoPut: React.FC<IVeterinariansInfo>  = ({post}) => {
-    
     var functionFromApi = VeterinariansApiFactory(); 
-
     const [name, setName] = useState(post.name);
     const [phoneNumber, setPhoneNumber] = useState(post.phoneNumber);
     const [dateOfBirth, setDateOfBirth] = useState(post.dateOfBirth);
     const [education, setEducation] = useState(post.education);
 
     const veterinarians: Veterinarians = {
-        
         name: name,
         phoneNumber: phoneNumber,
         dateOfBirth: dateOfBirth,

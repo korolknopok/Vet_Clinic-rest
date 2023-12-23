@@ -7,7 +7,6 @@ import {ClientApiFactory } from '../json/api.ts';
 var f = ClientApiFactory(); 
 
 function List() {
-    
     const [data, setData] = useState([]);
 
     async function getDataFromApi() {
