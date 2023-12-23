@@ -5,7 +5,6 @@ import {VeterinariansApiFactory} from '../json/api.ts';
 
 interface IVeterinariansInfo {
     
-    
     post: {
         id : string;
         name: string;
@@ -44,7 +43,6 @@ const VeterInfoPut: React.FC<IVeterinariansInfo>  = ({post}) => {
 
     return(
         <form >
-            
             <label>Name</label>
             <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
 
@@ -62,7 +60,6 @@ const VeterInfoPut: React.FC<IVeterinariansInfo>  = ({post}) => {
             </button>
         </form>
     )
-    
 }
 
 export default VeterInfoPut

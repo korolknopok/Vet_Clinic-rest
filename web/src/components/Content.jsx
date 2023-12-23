@@ -1,9 +1,8 @@
 import dog from '../img/dogLast.jpeg'
 import { useState } from 'react';
 import Modal from './Modal';
-import React, { useEffect } from 'react';
-import {ClientApiAxiosParamCreator, ClientApiFactory } from '../json/api.ts';
-
+import React from 'react';
+import { ClientApiFactory } from '../json/api.ts';
 
 export default function Content() {
     const [name, setName] = useState("");

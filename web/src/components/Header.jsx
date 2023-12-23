@@ -3,10 +3,6 @@ import { Outlet, Link } from "react-router-dom";
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment} from 'react-icons/ai'
 import { NavLink } from "react-router-dom";
 
-
-
-
-
 export default function Header() {
   
   return (
@@ -22,7 +18,6 @@ export default function Header() {
                 <div className = 'item'>
                   <NavLink to="/">Про нас</NavLink>
                 </div>
-                
                 
               </div>
               <div className='flex-items item-2'> Отзывы </div>

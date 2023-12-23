@@ -1,13 +1,8 @@
-
 import { useState } from 'react';
 import { useEffect } from 'react';
-
-import React, { Component } from 'react'
+import React from 'react'
 import ClientInfo from "../components/ClientInfo.tsx";
-import axios from 'axios';
-import {ClientApiAxiosParamCreator, ClientApiFactory } from '../json/api.ts';
-
-
+import {ClientApiFactory } from '../json/api.ts';
 
 var f = ClientApiFactory(); 
 
@@ -24,7 +19,6 @@ function List() {
         getDataFromApi();
     }, []);
 
-    
     const handleDeleteData = (id) => {
         console.log(id);
         f.apiClientIdDelete(id)
@@ -44,7 +38,6 @@ function List() {
             });
     };
     
-
     return (
         <div>
             {data.map(post => 
@@ -55,6 +48,5 @@ function List() {
         </div>
     );
 }
-
 
 export default List

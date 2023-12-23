@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Modal = ({ active, setActive, children }) => {
   return (
     <div

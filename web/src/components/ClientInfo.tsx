@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { TiDelete } from "react-icons/ti";
-
 
 interface IClientInfo {
     handleDeleteData: (id: string) => void;

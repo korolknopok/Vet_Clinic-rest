@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { TiDelete } from "react-icons/ti";
 import { MdOutlineEdit } from "react-icons/md";
 import { Dispatch, SetStateAction } from 'react';

@@ -1,12 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-
 import { useEffect } from 'react';
 import VeterinariansInfo from "./VeterinariansInfo.tsx";
-import axios from "axios";
-import { MdOutlineEdit } from "react-icons/md";
-
-import { AnyRecord } from 'dns';
 import VeterInfoPut from './VeterInfoPut.tsx';
 import {VeterinariansApiFactory} from '../json/api.ts';
 
