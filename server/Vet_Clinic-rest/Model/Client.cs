@@ -12,6 +12,6 @@ namespace Vet_Clinic_rest.Model
         public string Name { get; set; }
         public string phoneNumber { get; set; }
 
-        public string veterinaris
+        public string veterinaris { get; set; }
     }
 }
