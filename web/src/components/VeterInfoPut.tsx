@@ -39,20 +39,20 @@ const VeterInfoPut: React.FC<IVeterinariansInfo>  = ({post}) => {
 
     return(
         <form >
-            <label>Name</label>
+            <label>Name: </label>
             <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
 
-            <label>Phone Number</label>
+            <label>Phone Number: </label>
             <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
 
-            <label>Date of Birth</label>
+            <label>Date of Birth: </label>
             <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
 
-            <label>Education</label>
+            <label>Education: </label>
             <input type="text" value={education} onChange={(e) => setEducation(e.target.value)} />
             
             <button type="submit" onClick={() => handlePutVetData(post.id)}>
-                Submit
+                Изменить данные
             </button>
         </form>
     )

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import VeterinariansInfo from "./VeterinariansInfo.tsx";
 import VeterInfoPut from './VeterInfoPut.tsx';
+import VeterInfoPost from './VeterInfoPost.tsx';
 import {VeterinariansApiFactory} from '../json/api.ts';
 
 function IVeterinarians() {
@@ -36,14 +37,19 @@ function IVeterinarians() {
 
     return (
         <div>
+            Добавить ветеринара: 
+            
+            <VeterInfoPost post={data}/> 
             Список ветеринаров:
             <div>
                 {data.map(post => 
                     <div key = {post.id}>
+                        
                         <VeterinariansInfo post = {post} handleDeleteVetData={handleDeleteVetData} setIsOpen={setIsOpen} open = {open}/>  
                         {open === post.id && (
                             <VeterInfoPut post = {post}/> 
-                        )}  
+                        )}
+                        
                     </div>
                 )}
             </div>
