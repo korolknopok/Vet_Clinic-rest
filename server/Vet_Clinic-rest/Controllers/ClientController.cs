@@ -25,8 +25,15 @@ namespace Vet_Clinic_rest.Controllers
 
         public IActionResult Get()
         {
-            var client = _clients.Clients;
-            return Ok(client);
+            // Создаем экземпляр класса DTO
+            var clientDTO = new ClientDTO
+            {
+                veterinarians = new Veterinarians { /* Заполняем поля Veterinarians */ },
+                VeterinariansId = 123
+            };
+
+            // Возвращаем результат выполнения метода
+            return Ok(clientDTO);
         }
 
        /* public Client GetById(int id)
