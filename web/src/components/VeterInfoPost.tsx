@@ -5,7 +5,7 @@ import {VeterinariansApiFactory} from '../json/api.ts';
 
 interface IVeterinariansInfo {
     post: {
-        id : string;
+        id : number;
         name: string;
         dateOfBirth: string;
         phoneNumber: string;

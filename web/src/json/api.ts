@@ -47,6 +47,13 @@ export interface Client {
      * @memberof Client
      */
     'phoneNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Client
+     */
+    'veterinariansId'?: number | null;
+
 }
 /**
  * 

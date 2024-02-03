@@ -1,23 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { VeterinariansApiFactory } from '../json/api.ts';
+import { Client, VeterinariansApiFactory } from '../json/api.ts';
+
 
 interface Post {
-    id: string;
+    id: number;
     name: string;
 }
 
-const SelectVeter: React.FC = () => {
-    const [name, setName] = useState<string[]>([]);
+interface IVeterinariansInfo {
+    id : number;
+    name: string;
+    phoneNumber: string;
+    veterinariansId: number;
+    post: {
+        id : number;
+        name: string;
+        dateOfBirth: string;
+        phoneNumber: string;
+        education: string;
+    };
+}
+
+interface IClientInfo {
+    id: number;
+    name: string;
+    phoneNumber: string;
+    veterinariansId: number | undefined;
+  }
+  
+
+const SelectVeter: React.FC<IClientInfo> = (client) => {
+    const [id, setId] = useState(0);
+    const [veterinariansId, setVeterinariansId] = useState<number | undefined>();
+    const [name, setName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState();
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [education, setEducation] = useState('');
     const [data, setData]: any = useState<Post[]>([]);
     const [selectedName, setSelectedName] = useState<string | undefined>();
+   
 
     const functionFromApi = VeterinariansApiFactory();
 
+    const clientData: Client = {
+        id: client.id,
+        name: client.name,
+        phoneNumber: client.phoneNumber,
+        veterinariansId: client.veterinariansId,
+    };
+
+    const handlePutVetData = async (id) => {
+        console.log(selectedName);
+        try {
+            const response = await functionFromApi.apiVeterinariansIdPut(id, clientData,  {});
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async function getVetDataFromApi() {
         const response = await functionFromApi.apiVeterinariansGet();
         const { data } = response;
         setData(data);
+        
     }
 
     useEffect(() => {
@@ -25,9 +71,15 @@ const SelectVeter: React.FC = () => {
     }, []);
 
     return (
-        <Select value={selectedName} onChange={(event) => setSelectedName(event.target.value as string)}>
+        <Select value={selectedName} onChange={(event) => 
+        {
+            setVeterinariansId(event.target.value as number)
+            handlePutVetData(id);
+        
+        }
+        } >
             {data.map((post) => (
-                <MenuItem key={post.id} value={post.name}>{post.name}</MenuItem>
+                <MenuItem key={post.id} value={post.id}>{post.name}</MenuItem>
             ))}
         </Select>
     );

@@ -8,6 +8,8 @@ export default function Content() {
     const [modalActive, setModalActive] = useState(false);
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [veterinarianId, setVeterinarianId] = useState("");
+
     var f = ClientApiFactory();
 
     const handleSubmit = (e) => {
@@ -16,6 +18,7 @@ export default function Content() {
         const data = {
             name: name,
             phoneNumber: phoneNumber,
+            veterinarianId: veterinarianId,
         };
         const options = {
             
@@ -88,7 +91,16 @@ export default function Content() {
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />
-                            <button id="btn" type="submit" onClick={() => window.location.reload()}>Записаться</button>
+                            <input
+                                type="text"
+                                required
+                                placeholder="айди ветеринара"
+                                id="idvet"
+                                className="input"
+                                value={veterinarianId}
+                                onChange={(e) => setVeterinarianId(e.target.value)}
+                            />
+                            <button id="btn" type="submit" >Записаться</button>
                         </form>
                     </div>
                 </div>

@@ -3,11 +3,13 @@ import { TiDelete } from "react-icons/ti";
 import SelectVeter from "../routes/SelectVeter.tsx";
 
 interface IClientInfo {
-    handleDeleteData: (id: string) => void;
+    handleDeleteData: (id: number) => void;
+    
     post: {
-        id : string;
+        id : number;
         name: string;
         phoneNumber: string;
+        veterinariansId: number;
     };
 }
 
@@ -15,7 +17,7 @@ const ClientInfo: React.FC<IClientInfo> = ({handleDeleteData , post}) =>  {
     return (
         <div >
             {post.name}, {post.phoneNumber} 
-            <SelectVeter />
+            <SelectVeter client={post.name}/>
             <TiDelete className='styleIcons' onClick={() => {
                 handleDeleteData(post.id);
                 }}></TiDelete> 
