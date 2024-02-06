@@ -8,19 +8,15 @@ interface Post {
     name: string;
 }
 
-interface IVeterinariansInfo {
-    id : number;
-    name: string;
-    phoneNumber: string;
-    veterinariansId: number;
-    post: {
-        id : number;
-        name: string;
-        dateOfBirth: string;
-        phoneNumber: string;
-        education: string;
-    };
-}
+// interface IVeterinariansInfo {
+//     post: {
+//         id : number;
+//         name: string;
+//         dateOfBirth: string;
+//         phoneNumber: string;
+//         education: string;
+//     };
+// }
 
 interface IClientInfo {
     id: number;

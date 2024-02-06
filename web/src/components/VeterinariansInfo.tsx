@@ -3,7 +3,7 @@ import { TiDelete } from "react-icons/ti";
 import { MdOutlineEdit } from "react-icons/md";
 import { Dispatch, SetStateAction } from 'react';
 
-interface IVeterinariansInfo {
+interface VeterinariansInfo {
     handleDeleteVetData: (id: string) => void;
     setIsOpen:  Dispatch<SetStateAction<string>>;
     open: string;
@@ -17,13 +17,13 @@ interface IVeterinariansInfo {
     };
 }
 
-const VeterinariansInfo: React.FC<IVeterinariansInfo> = ({handleDeleteVetData , post, setIsOpen, open}) =>  {
+const VeterinariansInfo: React.FC<VeterinariansInfo> = ({handleDeleteVetData , post, setIsOpen, open}) =>  {
     return (
-        <div >
+        <div>
             {post.name}, {post.dateOfBirth}, {post.phoneNumber}, {post.education}
             <TiDelete className='styleIcons' onClick={() => {
                 handleDeleteVetData(post.id);
-                }}></TiDelete>
+            }}/>
             <MdOutlineEdit className='styleIcons' onClick={() => {
                 if (open === post.id) {
                     setIsOpen('0');
@@ -31,7 +31,7 @@ const VeterinariansInfo: React.FC<IVeterinariansInfo> = ({handleDeleteVetData , 
                 else {
                     setIsOpen(post.id)
                 }
-            }}></MdOutlineEdit>
+            }}/>
             
         </div>
     );

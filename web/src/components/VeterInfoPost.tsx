@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Veterinarians } from '../json/api.tsx';
 import {VeterinariansApiFactory} from '../json/api.ts';
 
-interface IVeterinariansInfo {
+interface VeterinariansInfo {
     post: {
         id : number;
         name: string;
@@ -13,14 +13,14 @@ interface IVeterinariansInfo {
     };
 }
 
-const VeterInfoPost: React.FC<IVeterinariansInfo>  = ({post}) => {
+const VeterInfoPost: React.FC<VeterinariansInfo>  = ({post}) => {
     var functionFromApi = VeterinariansApiFactory(); 
     const [name, setName] = useState(post.name);
     const [phoneNumber, setPhoneNumber] = useState(post.phoneNumber);
     const [dateOfBirth, setDateOfBirth] = useState(post.dateOfBirth);
     const [education, setEducation] = useState(post.education);
 
-    const veterinarians: Veterinarians = {
+    const veterinarian: Veterinarians = {
         name: name,
         phoneNumber: phoneNumber,
         dateOfBirth: dateOfBirth,
@@ -30,7 +30,7 @@ const VeterInfoPost: React.FC<IVeterinariansInfo>  = ({post}) => {
     const handlePostVetData = async () => {
         
         try {
-            const response = await functionFromApi.apiVeterinariansPost(veterinarians,  {});
+            const response = await functionFromApi.apiVeterinariansPost(veterinarian,  {});
             console.log(response);
         } catch (error) {
             console.log(error);

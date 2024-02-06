@@ -1,26 +1,26 @@
-import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import VeterinariansInfo from "./VeterinariansInfo.tsx";
 import VeterInfoPut from './VeterInfoPut.tsx';
 import VeterInfoPost from './VeterInfoPost.tsx';
 import {VeterinariansApiFactory} from '../json/api.ts';
+import React, { Dispatch, SetStateAction } from 'react';
 
 function IVeterinarians() {
     const functionFromApi = VeterinariansApiFactory(); 
-    const [open, setIsOpen] = useState('0');
-    const [data, setData]: any  = useState([]);
+    const [open, setIsOpen]  = useState<boolean>(false);
+    const [data, setData]: [never[], Dispatch<SetStateAction<never[]>>] = useState([]);
 
     async function getVetDataFromApi() {
         const response = await functionFromApi.apiVeterinariansGet();
-        const { data } = response;
+        const { data }  = response;
         setData(data);
     }
     useEffect(() => {
         getVetDataFromApi();
     }, []);
 
-    const handleDeleteVetData = (id) => {
+    const handleDeleteVetData = (id : number) => {
         functionFromApi.apiVeterinariansIdDelete(id)
             .then(response => {
                 if (response.status == 200) {
@@ -44,12 +44,10 @@ function IVeterinarians() {
             <div>
                 {data.map(post => 
                     <div key = {post.id}>
-                        
                         <VeterinariansInfo post = {post} handleDeleteVetData={handleDeleteVetData} setIsOpen={setIsOpen} open = {open}/>  
                         {open === post.id && (
                             <VeterInfoPut post = {post}/> 
                         )}
-                        
                     </div>
                 )}
             </div>
