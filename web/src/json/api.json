@@ -99,7 +99,33 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Veterinarians"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Veterinarians"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Veterinarians"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -214,6 +240,11 @@
           },
           "phoneNumber": {
             "type": "string",
+            "nullable": true
+          },
+          "veterinariansId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },

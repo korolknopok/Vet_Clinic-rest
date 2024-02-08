@@ -18,15 +18,14 @@ interface Post {
 //     };
 // }
 
-interface IClientInfo {
+interface ClientInfo {
     id: number;
     name: string;
     phoneNumber: string;
-    veterinariansId: number | undefined;
   }
   
 
-const SelectVeter: React.FC<IClientInfo> = (client) => {
+const SelectVet: React.FC<ClientInfo> = (client) => {
     const [id, setId] = useState(0);
     const [veterinariansId, setVeterinariansId] = useState<number | undefined>();
     const [name, setName] = useState('');
@@ -59,7 +58,6 @@ const SelectVeter: React.FC<IClientInfo> = (client) => {
         const response = await functionFromApi.apiVeterinariansGet();
         const { data } = response;
         setData(data);
-        
     }
 
     useEffect(() => {
@@ -81,4 +79,4 @@ const SelectVeter: React.FC<IClientInfo> = (client) => {
     );
 }
 
-export default SelectVeter;
+export default SelectVet;

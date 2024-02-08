@@ -1,27 +1,25 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import VeterinariansInfo from "./VeterinariansInfo.tsx";
-import VeterInfoPut from './VeterInfoPut.tsx';
-import VeterInfoPost from './VeterInfoPost.tsx';
-import {VeterinariansApiFactory} from '../json/api.ts';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, {useEffect, useState} from 'react';
+import VeterinariansInfo from "./VeterinariansInfo";
+import VeterInfoPost from "./VeterInfoPost";
+import {Veterinarians, VeterinariansApi} from '../json';
+import VeterInfoPut from "./VeterInfoPut";
 
 function IVeterinarians() {
-    const functionFromApi = VeterinariansApiFactory(); 
+    const api = new VeterinariansApi();
     const [open, setIsOpen]  = useState<boolean>(false);
-    const [data, setData]: [never[], Dispatch<SetStateAction<never[]>>] = useState([]);
+    const [data, setData]   = useState<Veterinarians[]>();
 
     async function getVetDataFromApi() {
-        const response = await functionFromApi.apiVeterinariansGet();
-        const { data }  = response;
-        setData(data);
+        const response = await api.apiVeterinariansGet();
+        const { data : dataResponse }  = response;
+        setData(dataResponse);
     }
     useEffect(() => {
         getVetDataFromApi();
     }, []);
 
     const handleDeleteVetData = (id : number) => {
-        functionFromApi.apiVeterinariansIdDelete(id)
+        api.apiVeterinariansIdDelete(id)
             .then(response => {
                 if (response.status == 200) {
                     console.log('Данные успешно удалены');

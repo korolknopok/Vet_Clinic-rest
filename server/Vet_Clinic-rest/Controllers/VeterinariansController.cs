@@ -20,10 +20,10 @@ namespace Vet_Clinic_rest.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public List<Veterinarians> Get()
         {
             var veterinarians = _veterinarians.Veterinarians;
-            return Ok(veterinarians);
+            return veterinarians.ToList();
         }
 
         [HttpPost]
