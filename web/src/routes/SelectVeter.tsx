@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { Client, VeterinariansApiFactory } from '../json/api.ts';
+import { Client, VeterinariansApiFactory } from '../json/api';
 
 
 interface Post {
