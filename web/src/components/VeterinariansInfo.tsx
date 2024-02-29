@@ -1,18 +1,16 @@
+// @ts-ignore
+import React from 'react'
 import { TiDelete } from "react-icons/ti";
 import { MdOutlineEdit } from "react-icons/md";
 import { Dispatch, SetStateAction } from 'react';
+// @ts-ignore
+import {Veterinarians} from "../json/api.ts";
 
 interface VeterinariansInfo {
-    handleDeleteVetData: (id: number) => void;
-    setIsOpen:  Dispatch<SetStateAction<boolean>>;
-    open: boolean;
-    post:  {
-        id : number;
-        name: string;
-        dateOfBirth: string;
-        phoneNumber: string;
-        education: string;
-    };
+    handleDeleteVetData: (id: string) => void;
+    setIsOpen:  Dispatch<SetStateAction<string>>;
+    open: string;
+    post: Veterinarians;
 }
 
 const VeterinariansInfo: React.FC<VeterinariansInfo> = ({handleDeleteVetData , post, setIsOpen, open}) =>  {

@@ -43,7 +43,7 @@ const SelectVet: React.FC<ClientInfo> = (client) => {
         id: client.id,
         name: client.name,
         phoneNumber: client.phoneNumber,
-
+        veterinariansId: client.veterinariansId,
     };
 
     const handlePutVetData = async (id) => {

@@ -1,3 +1,5 @@
+// @ts-ignore
+import React from "react";
 import { useState } from 'react';
 // @ts-ignore
 import { Veterinarians } from '../json/api.ts';
@@ -5,13 +7,7 @@ import { Veterinarians } from '../json/api.ts';
 import {VeterinariansApiFactory} from '../json/api.ts';
 
 interface VeterinariansInfo {
-    post: {
-        id : number;
-        name: string;
-        dateOfBirth: string;
-        phoneNumber: string;
-        education: string;
-    };
+    post: Veterinarians;
 }
 
 const VeterInfoPut: React.FC<VeterinariansInfo>  = ({post}) => {

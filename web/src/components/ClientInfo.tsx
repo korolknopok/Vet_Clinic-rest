@@ -1,16 +1,15 @@
+// @ts-ignore
+import React from 'react'
 import { TiDelete } from "react-icons/ti";
 // @ts-ignore
 import SelectVeter from "../routes/SelectVeter.tsx";
+// @ts-ignore
+import {Veterinarians} from "../json/api.ts";
 
 interface IClientInfo {
     handleDeleteData: (id: number) => void;
     
-    post: {
-        id : number;
-        name: string;
-        phoneNumber: string;
-        veterinariansId: number;
-    };
+    post: Veterinarians;
 }
 
 const ClientInfo: React.FC<IClientInfo> = ({handleDeleteData , post}) =>  {
