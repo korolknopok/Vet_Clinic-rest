@@ -1,6 +1,6 @@
-import React from 'react'
 import { TiDelete } from "react-icons/ti";
-import SelectVeter from "../routes/SelectVeter";
+// @ts-ignore
+import SelectVeter from "../routes/SelectVeter.tsx";
 
 interface IClientInfo {
     handleDeleteData: (id: number) => void;

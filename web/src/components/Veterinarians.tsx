@@ -1,13 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import VeterinariansInfo from "./VeterinariansInfo";
-import VeterInfoPost from "./VeterInfoPost";
-import {Veterinarians, VeterinariansApi} from '../json';
-import VeterInfoPut from "./VeterInfoPut";
+// @ts-ignore
+import VeterinariansInfo from './VeterinariansInfo.tsx';
+// @ts-ignore
+import VeterInfoPost from "./VeterInfoPost.tsx";
+// @ts-ignore
+import VeterInfoPut from "./VeterInfoPut.tsx";
+import {useEffect, useState} from "react";
+// @ts-ignore
+import {Veterinarians, VeterinariansApi} from "../json/api.ts";
 
 function IVeterinarians() {
     const api = new VeterinariansApi();
     const [open, setIsOpen]  = useState<boolean>(false);
-    const [data, setData]   = useState<Veterinarians[]>();
+    const [data, setData]  = useState<Veterinarians[]>();
 
     async function getVetDataFromApi() {
         const response = await api.apiVeterinariansGet();
@@ -35,16 +39,16 @@ function IVeterinarians() {
 
     return (
         <div>
-            Добавить ветеринара: 
-            
-            <VeterInfoPost post={data}/> 
+            Добавить ветеринара:
+
+            <VeterInfoPost post={data}/>
             Список ветеринаров:
             <div>
-                {data.map(post => 
+                {data.map(post =>
                     <div key = {post.id}>
-                        <VeterinariansInfo post = {post} handleDeleteVetData={handleDeleteVetData} setIsOpen={setIsOpen} open = {open}/>  
-                        {open === post.id && (
-                            <VeterInfoPut post = {post}/> 
+                        <VeterinariansInfo post = {post} handleDeleteVetData={handleDeleteVetData} setIsOpen={setIsOpen} open = {open}/>
+                        {open === true && (
+                            <VeterInfoPut post = {post}/>
                         )}
                     </div>
                 )}

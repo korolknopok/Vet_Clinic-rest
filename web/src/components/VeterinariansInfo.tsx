@@ -1,19 +1,17 @@
-import React from 'react'
 import { TiDelete } from "react-icons/ti";
 import { MdOutlineEdit } from "react-icons/md";
 import { Dispatch, SetStateAction } from 'react';
 
 interface VeterinariansInfo {
-    handleDeleteVetData: (id: string) => void;
-    setIsOpen:  Dispatch<SetStateAction<string>>;
-    open: string;
-    post: {
-        id : string;
+    handleDeleteVetData: (id: number) => void;
+    setIsOpen:  Dispatch<SetStateAction<boolean>>;
+    open: boolean;
+    post:  {
+        id : number;
         name: string;
         dateOfBirth: string;
         phoneNumber: string;
         education: string;
-        
     };
 }
 

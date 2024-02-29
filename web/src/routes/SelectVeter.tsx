@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { Client, VeterinariansApiFactory } from '../json/api';
+// @ts-ignore
+import { Client, VeterinariansApiFactory } from '../json/api.ts';
 
 
 interface Post {
@@ -42,7 +43,7 @@ const SelectVet: React.FC<ClientInfo> = (client) => {
         id: client.id,
         name: client.name,
         phoneNumber: client.phoneNumber,
-        veterinariansId: client.veterinariansId,
+
     };
 
     const handlePutVetData = async (id) => {

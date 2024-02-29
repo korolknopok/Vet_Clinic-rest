@@ -1,7 +1,8 @@
-import React from "react";
 import { useState } from 'react';
-import { Veterinarians } from '../json/api';
-import {VeterinariansApiFactory} from '../json/api';
+// @ts-ignore
+import { Veterinarians } from '../json/api.ts';
+// @ts-ignore
+import {VeterinariansApiFactory} from '../json/api.ts';
 
 interface VeterinariansInfo {
     post: {
