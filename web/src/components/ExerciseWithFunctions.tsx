@@ -30,58 +30,73 @@
 
 //Ex2
 
-interface Shape {
-    getForm() : string;
-    getId() : number;
+// interface Shape {
+//     getForm() : string;
+//     getId() : number;
+// }
+//
+// class Circle implements Shape {
+//     private id: number;
+//     constructor(id: number) {
+//         this.id = id;
+//     }
+//     getForm(): string {
+//         return 'Circle';
+//     }
+//     getId(): number {
+//         return this.id;
+//     }
+// }
+//
+// class Square implements Shape {
+//     private id: number;
+//     constructor(id:number) {
+//         this.id = id;
+//     }
+//     getForm(): string {
+//         return 'Square'
+//     }
+//     getId() : number {
+//         return this.id;
+//     }
+// }
+//
+// class Tringle implements Shape {
+//     private id: number;
+//     constructor(id: number) {
+//         this.id = id;
+//     }
+//     getForm(): string {
+//         return 'Tringle';
+//     }
+//     getId(): number {
+//         return this.id;
+//     }
+// }
+//
+// function printShapeInfo(shape:Shape): void {
+//     console.log(`Id: ${shape.getId()}, Form: ${shape.getId()}`);
+// }
+//
+// const circle = new Circle(1);
+// const square = new Square(2);
+// const tringle = new Tringle(3);
+//
+// printShapeInfo(circle);
+// printShapeInfo(square);
+// printShapeInfo(tringle);
+
+//Ex 3
+
+function convert(first: () => number,second:(num:number) => string): string {
+    const firstResult = first();
+    return second(firstResult);
 }
 
-class Circle implements Shape {
-    private id: number;
-    constructor(id: number) {
-        this.id = id;
-    }
-    getForm(): string {
-        return 'Circle';
-    }
-    getId(): number {
-        return this.id;
-    }
+//Ex 4
+
+function printResult() {
+    console.log(convert(() => 5,(num) => `Number is ${num}`));
 }
 
-class Square implements Shape {
-    private id: number;
-    constructor(id:number) {
-        this.id = id;
-    }
-    getForm(): string {
-        return 'Square'
-    }
-    getId() : number {
-        return this.id;
-    }
-}
-
-class Tringle implements Shape {
-    private id: number;
-    constructor(id: number) {
-        this.id = id;
-    }
-    getForm(): string {
-        return 'Tringle';
-    }
-    getId(): number {
-        return this.id;
-    }
-}
-
-function printShapeInfo(shape:Shape): void {
-    console.log(`Id: ${shape.getId()}, Form: ${shape.getId()}`);
-}
-
-const circle = new Circle(1);
-const square = new Square(2);
-const tringle = new Tringle(3);
-
-printShapeInfo(circle);
-printShapeInfo(square);
-printShapeInfo(tringle);
+printResult();
