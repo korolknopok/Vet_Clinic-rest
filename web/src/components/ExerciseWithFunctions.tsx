@@ -88,15 +88,34 @@
 
 //Ex 3
 
-function convert(first: () => number,second:(num:number) => string): string {
-    const firstResult = first();
-    return second(firstResult);
-}
+// function convert(first: () => number,second:(num:number) => string): string {
+//     const firstResult = first();
+//     return second(firstResult);
+// }
 
 //Ex 4
 
-function printResult() {
-    console.log(convert(() => 5,(num) => `Number is ${num}`));
+// function printResult() {
+//     console.log(convert(() => 5,(num) => `Number is ${num}`));
+// }
+//
+// printResult();
+
+//Ex 5  Дженерик функция, принимающая на вход объект любого типа и число n,
+// а возвращающая массив объектов этого же типа, состоящий из n копий переданного объекта.
+
+//Ex 5
+
+function createArray<T>(obj: T, n: number): T[] {
+    const arr: T[] = [];
+    for(let i = 0; i < n; i++) {
+        arr.push(obj);
+    }
+    return arr;
 }
 
-printResult();
+const obj = {name: 'Artem', age: 20};
+const n = 3;
+const result = createArray(obj,n);
+console.log(result);
+
