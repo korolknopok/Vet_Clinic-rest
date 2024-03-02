@@ -119,3 +119,34 @@
 // const result = createArray(obj,n);
 // console.log(result);
 
+//Ex 6
+
+// interface Shape {
+//     id: number;
+// }
+//
+// interface TwodShape extends Shape {
+//     area: number;
+// }
+//
+// interface TreedShape extends Shape {
+//     capacity: number;
+// }
+//
+// function draw(shape: Shape) {
+//     if ('area' in shape) {
+//         draw2d(shape as TwodShape);
+//     } else if ('capacity' in shape) {
+//         draw3d(shape as TreedShape);
+//     } else {
+//         throw new Error('Unsupported shape type');
+//     }
+// }
+//
+// function draw2d(shape: TwodShape): void {
+//     console.log(`Drawing 2d object with id ${shape.id} and area ${shape.area}`);
+// }
+//
+// function draw3d(shape: TreedShape): void {
+//     console.log(`Drawing 3d object with id ${shape.id} and capacity ${shape.capacity}`);
+// }
