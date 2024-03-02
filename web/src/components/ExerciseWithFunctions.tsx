@@ -106,16 +106,16 @@
 
 //Ex 5
 
-function createArray<T>(obj: T, n: number): T[] {
-    const arr: T[] = [];
-    for(let i = 0; i < n; i++) {
-        arr.push(obj);
-    }
-    return arr;
-}
-
-const obj = {name: 'Artem', age: 20};
-const n = 3;
-const result = createArray(obj,n);
-console.log(result);
+// function createArray<T>(obj: T, n: number): T[] {
+//     const arr: T[] = [];
+//     for(let i = 0; i < n; i++) {
+//         arr.push(obj);
+//     }
+//     return arr;
+// }
+//
+// const obj = {name: 'Artem', age: 20};
+// const n = 3;
+// const result = createArray(obj,n);
+// console.log(result);
 
