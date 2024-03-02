@@ -150,3 +150,24 @@
 // function draw3d(shape: TreedShape): void {
 //     console.log(`Drawing 3d object with id ${shape.id} and capacity ${shape.capacity}`);
 // }
+
+//Ex 7
+
+function runLambdaWithDelay(lambda: () => string, delay: number): Promise<string> {
+    return new Promise((resolve, reject) =>{
+        setTimeout(() =>{
+            try {
+                resolve(lambda());
+            }
+            catch (error){
+                reject(error);
+            }
+        }, delay);
+    });
+}
+
+runLambdaWithDelay(() : string => {
+    throw new Error("Error message");
+},1000)
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
