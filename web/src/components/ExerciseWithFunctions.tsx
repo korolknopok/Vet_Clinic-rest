@@ -125,31 +125,45 @@
 //     id: number;
 // }
 //
-// interface TwodShape extends Shape {
+//
+// interface TwoDShape extends Shape{
 //     area: number;
+//     type : 'TwoD'
 // }
 //
-// interface TreedShape extends Shape {
+// interface ThreeDShape extends Shape{
 //     capacity: number;
+//     type : 'ThreeD'
 // }
 //
 // function draw(shape: Shape) {
 //     if ('area' in shape) {
-//         draw2d(shape as TwodShape);
+//         draw2d(shape as TwoDShape);
 //     } else if ('capacity' in shape) {
-//         draw3d(shape as TreedShape);
+//         draw3d(shape as ThreeDShape);
 //     } else {
 //         throw new Error('Unsupported shape type');
 //     }
 // }
 //
-// function draw2d(shape: TwodShape): void {
+// function draw2d(shape: TwoDShape): void {
 //     console.log(`Drawing 2d object with id ${shape.id} and area ${shape.area}`);
 // }
 //
-// function draw3d(shape: TreedShape): void {
+// function draw3d(shape: ThreeDShape): void {
 //     console.log(`Drawing 3d object with id ${shape.id} and capacity ${shape.capacity}`);
 // }
+//
+//
+// const twoDShape: TwoDShape = { id: 1, type: 'TwoD', area: 50 };
+// const threeDShape: ThreeDShape = { id: 2, type: 'ThreeD', capacity: 100 };
+//
+// draw(twoDShape);
+// draw(threeDShape);
+//
+// twoDShape.type = 'ThreeD';
+//
+// draw(twoDShape);
 
 //Ex 7
 
