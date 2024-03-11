@@ -16,14 +16,15 @@
 import type { Configuration } from "./configuration.ts";
 import type { RequestArgs } from "./base.ts";
 import type { AxiosInstance, AxiosResponse } from 'axios';
+// @ts-ignore
 import { RequiredError } from "./base.ts";
 
-
 /**
-
+ *
  * @export
  */
 export const DUMMY_BASE_URL = 'https://localhost:7205'
+
 /**
  *
  * @throws {RequiredError}
@@ -144,7 +145,7 @@ export const toPathString = function (url: URL) {
  */
 export const createRequestFunction = function (axiosArgs: RequestArgs, globalAxios: AxiosInstance, BASE_PATH: string, configuration?: Configuration) {
     return <T = unknown, R = AxiosResponse<T>>(axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-        const axiosRequestArgs = {...axiosArgs.options, url: (configuration?.basePath || axios.defaults.baseURL || basePath) + axiosArgs.url};
+        const axiosRequestArgs = {...axiosArgs.options, url: (axios.defaults.baseURL ? '' : configuration?.basePath ?? basePath) + axiosArgs.url};
         return axios.request<T, R>(axiosRequestArgs);
     };
 }

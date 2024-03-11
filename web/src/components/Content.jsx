@@ -1,24 +1,25 @@
 import dog from '../img/dogLast.jpeg'
 import { useState } from 'react';
 import Modal from './Modal';
-import React, { useEffect } from 'react';
-import {ClientApiAxiosParamCreator, ClientApiFactory } from '../json/api.ts';
-
+import React from 'react';
+import { ClientApiFactory } from '../json/api.ts';
 
 export default function Content() {
+    const [modalActive, setModalActive] = useState(false);
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [veterinarianId, setVeterinarianId] = useState("");
+
     var f = ClientApiFactory();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Создание объекта с данными для отправки
         const data = {
             name: name,
             phoneNumber: phoneNumber,
+            veterinarianId: veterinarianId,
         };
-
-        // Опции для Fetch API
         const options = {
             
             method: 'POST',
@@ -29,35 +30,29 @@ export default function Content() {
             body: JSON.stringify(data),
         };
 
-        // Отправка запроса
         f.apiClientPost(data)
             .then(response => response.json())
             .then(data => {
-            // Обработка ответа сервера
-            console.log(data);
+                console.log(data);
             })
             .catch(error => {
-            // Обработка ошибок
-            console.error('Error:', error);
+                console.error('Error:', error);
             });
-
         setModalActive(false);
     };
 
-    const [modalActive, setModalActive] = useState(false);
     return (
         <div className='content row' >
             <div className='presentation'>
-            <img  src={dog}/>
+                <img  src={dog}/>
             </div>
-
-            <div className='blockright'>
+        <div className='blockright'>
             <label className='labelmetod'> 
                 <ul>
                     NEW
                 </ul>
                 Современные методы обследования
-                </label>
+            </label>
                 <label className='labelvetclinic'>
                 <div>Круглосуточная</div>
                 <div>ветеринарная</div>
@@ -73,7 +68,6 @@ export default function Content() {
                         Записаться на приём 
                     </div>
                 </div>
-                
                 <Modal active={modalActive} setActive={setModalActive}  >
                     <div className="conteiner">
                         <div className="form">
@@ -97,7 +91,16 @@ export default function Content() {
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />
-                            <button id="btn" type="submit" onClick={() => window.location.reload()}>Записаться</button>
+                            <input
+                                type="text"
+                                required
+                                placeholder="айди ветеринара"
+                                id="idvet"
+                                className="input"
+                                value={veterinarianId}
+                                onChange={(e) => setVeterinarianId(e.target.value)}
+                            />
+                            <button id="btn" type="submit" >Записаться</button>
                         </form>
                     </div>
                 </div>

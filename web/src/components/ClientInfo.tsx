@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
+// @ts-ignore
+import React from 'react'
 import { TiDelete } from "react-icons/ti";
-
+// @ts-ignore
+import SelectVeter from "../routes/SelectVeter.tsx";
+// @ts-ignore
+import {Veterinarians} from "../json/api.ts";
 
 interface IClientInfo {
-    handleDeleteData: (id: string) => void;
+    handleDeleteData: (id: number) => void;
     
-    post: {
-        id : string;
-        name: string;
-        phoneNumber: string;
-    };
+    post: Veterinarians;
 }
 
 const ClientInfo: React.FC<IClientInfo> = ({handleDeleteData , post}) =>  {
-        
-        return (
-            <div >
-                {post.name}, {post.phoneNumber} 
-                <TiDelete className='styleIcons' onClick={() => {
-                    handleDeleteData(post.id);
-                    }}></TiDelete>
-            </div>
-        );
-    
+    return (
+        <div >
+            {post.name}, {post.phoneNumber} 
+            <SelectVeter client={post.name}/>
+            <TiDelete className='styleIcons' onClick={() => {
+                handleDeleteData(post.id);
+                }}></TiDelete> 
+                
+        </div>
+    );
 };
 
 export default ClientInfo

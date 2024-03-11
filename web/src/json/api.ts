@@ -14,9 +14,8 @@
 
 
 import type { Configuration } from './configuration.ts';
-import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
-
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common.ts';
@@ -48,6 +47,49 @@ export interface Client {
      * @memberof Client
      */
     'phoneNumber'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Client
+     */
+    'veterinariansId'?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface Veterinarians
+ */
+export interface Veterinarians {
+    /**
+     * 
+     * @type {number}
+     * @memberof Veterinarians
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Veterinarians
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Veterinarians
+     */
+    'dateOfBirth'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Veterinarians
+     */
+    'phoneNumber'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Veterinarians
+     */
+    'education'?: string | null;
 }
 
 /**
@@ -61,9 +103,8 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiClientGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/Client`;
-            
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -92,7 +133,7 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientIdDelete: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiClientIdDelete: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('apiClientIdDelete', 'id', id)
             const localVarPath = `/api/Client/{id}`
@@ -125,7 +166,7 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientIdGet: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiClientIdGet: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('apiClientIdGet', 'id', id)
             const localVarPath = `/api/Client/{id}`
@@ -158,7 +199,7 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientPost: async (client?: Client, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiClientPost: async (client?: Client, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/Client`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -200,7 +241,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientGet(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientGet']?.[index]?.url;
@@ -212,7 +253,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientIdDelete(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientIdDelete(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientIdDelete(id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientIdDelete']?.[index]?.url;
@@ -224,7 +265,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientIdGet(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientIdGet(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientIdGet(id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientIdGet']?.[index]?.url;
@@ -236,7 +277,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientPost(client?: Client, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientPost(client?: Client, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientPost(client, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientPost']?.[index]?.url;
@@ -303,7 +344,7 @@ export class ClientApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ClientApi
      */
-    public apiClientGet(options?: AxiosRequestConfig) {
+    public apiClientGet(options?: RawAxiosRequestConfig) {
         return ClientApiFp(this.configuration).apiClientGet(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -314,7 +355,7 @@ export class ClientApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ClientApi
      */
-    public apiClientIdDelete(id: number, options?: AxiosRequestConfig) {
+    public apiClientIdDelete(id: number, options?: RawAxiosRequestConfig) {
         return ClientApiFp(this.configuration).apiClientIdDelete(id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -325,7 +366,7 @@ export class ClientApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ClientApi
      */
-    public apiClientIdGet(id: number, options?: AxiosRequestConfig) {
+    public apiClientIdGet(id: number, options?: RawAxiosRequestConfig) {
         return ClientApiFp(this.configuration).apiClientIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -336,8 +377,307 @@ export class ClientApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ClientApi
      */
-    public apiClientPost(client?: Client, options?: AxiosRequestConfig) {
+    public apiClientPost(client?: Client, options?: RawAxiosRequestConfig) {
         return ClientApiFp(this.configuration).apiClientPost(client, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * VeterinariansApi - axios parameter creator
+ * @export
+ */
+export const VeterinariansApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Veterinarians`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansIdDelete: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiVeterinariansIdDelete', 'id', id)
+            const localVarPath = `/api/Veterinarians/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Veterinarians} [veterinarians] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansIdPut: async (id: number, veterinarians?: Veterinarians, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('apiVeterinariansIdPut', 'id', id)
+            const localVarPath = `/api/Veterinarians/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(veterinarians, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {Veterinarians} [veterinarians] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansPost: async (veterinarians?: Veterinarians, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Veterinarians`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(veterinarians, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * VeterinariansApi - functional programming interface
+ * @export
+ */
+export const VeterinariansApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = VeterinariansApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiVeterinariansGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Veterinarians>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiVeterinariansGet(options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['VeterinariansApi.apiVeterinariansGet']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiVeterinariansIdDelete(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiVeterinariansIdDelete(id, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['VeterinariansApi.apiVeterinariansIdDelete']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Veterinarians} [veterinarians] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiVeterinariansIdPut(id: number, veterinarians?: Veterinarians, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiVeterinariansIdPut(id, veterinarians, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['VeterinariansApi.apiVeterinariansIdPut']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {Veterinarians} [veterinarians] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiVeterinariansPost(veterinarians?: Veterinarians, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiVeterinariansPost(veterinarians, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['VeterinariansApi.apiVeterinariansPost']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * VeterinariansApi - factory interface
+ * @export
+ */
+export const VeterinariansApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = VeterinariansApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansGet(options?: any): AxiosPromise<Array<Veterinarians>> {
+            return localVarFp.apiVeterinariansGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansIdDelete(id: number, options?: any): AxiosPromise<void> {
+            return localVarFp.apiVeterinariansIdDelete(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {Veterinarians} [veterinarians] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansIdPut(id: number, veterinarians?: Veterinarians, options?: any): AxiosPromise<void> {
+            return localVarFp.apiVeterinariansIdPut(id, veterinarians, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Veterinarians} [veterinarians] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiVeterinariansPost(veterinarians?: Veterinarians, options?: any): AxiosPromise<void> {
+            return localVarFp.apiVeterinariansPost(veterinarians, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * VeterinariansApi - object-oriented interface
+ * @export
+ * @class VeterinariansApi
+ * @extends {BaseAPI}
+ */
+export class VeterinariansApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VeterinariansApi
+     */
+    public apiVeterinariansGet(options?: RawAxiosRequestConfig) {
+        return VeterinariansApiFp(this.configuration).apiVeterinariansGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VeterinariansApi
+     */
+    public apiVeterinariansIdDelete(id: number, options?: RawAxiosRequestConfig) {
+        return VeterinariansApiFp(this.configuration).apiVeterinariansIdDelete(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {Veterinarians} [veterinarians] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VeterinariansApi
+     */
+    public apiVeterinariansIdPut(id: number, veterinarians?: Veterinarians, options?: RawAxiosRequestConfig) {
+        return VeterinariansApiFp(this.configuration).apiVeterinariansIdPut(id, veterinarians, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {Veterinarians} [veterinarians] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VeterinariansApi
+     */
+    public apiVeterinariansPost(veterinarians?: Veterinarians, options?: RawAxiosRequestConfig) {
+        return VeterinariansApiFp(this.configuration).apiVeterinariansPost(veterinarians, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

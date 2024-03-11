@@ -12,5 +12,7 @@ namespace Vet_Clinic_rest.Context
         }
 
         public DbSet<Client> Clients { get; set; }
+
+        public DbSet<Veterinarians> Veterinarians { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
 using Microsoft.AspNetCore.Cors;
 
+
 namespace Vet_Clinic_rest.Controllers
 {
     [Route("api/[controller]")]
@@ -25,16 +26,25 @@ namespace Vet_Clinic_rest.Controllers
 
         public IActionResult Get()
         {
-            var client = _clients.Clients;
-            return Ok(client);
+            var clients = _clients.Clients.Select(client => new ClientDTO
+            {
+                Id = client.Id,
+                name = client.name,
+                phoneNumber = client.phoneNumber,
+                veterinarianId = client.veterinarianId
+            });
+
+            return Ok(clients);
         }
 
-       /* public Client GetById(int id)
-        {
-            var clients = _clients.Clients.Find(id);
-            if (clients == null) { throw new KeyNotFoundException("User Not Found"); }
-            return clients;
-        }*/
+
+
+        /* public Client GetById(int id)
+         {
+             var clients = _clients.Clients.Find(id);
+             if (clients == null) { throw new KeyNotFoundException("User Not Found"); }
+             return clients;
+         }*/
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -49,7 +59,7 @@ namespace Vet_Clinic_rest.Controllers
         public IActionResult Post([FromBody] Client model)
         {
 
-            var userExist = _clients.Clients.Any(e => e.Name == model.Name);
+            var userExist = _clients.Clients.Any(e => e.name == model.name);
             if (userExist == true)
             {
                 return Ok(new { Message = "User Already Created" });
