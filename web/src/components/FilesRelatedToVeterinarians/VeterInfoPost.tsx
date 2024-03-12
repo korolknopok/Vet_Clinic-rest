@@ -3,9 +3,9 @@
 import React from "react";
 import { useState } from 'react';
 // @ts-ignore
-import { Veterinarians } from '../json/api.ts';
+import { Veterinarians } from '../../json/api.ts';
 // @ts-ignore
-import {VeterinariansApiFactory} from '../json/api.ts';
+import {VeterinariansApiFactory} from '../../json/api.ts';
 
 interface VeterinariansInfo {
     post: Veterinarians;

@@ -1,10 +1,10 @@
 import * as React from "react";
-import Header from "./components/Header.jsx";
-import Content from "./components/Content";
+import Header from "./components/MainComponentsDisplayPage/Header.jsx";
+import Content from "./components/MainComponentsDisplayPage/Content";
 import './css/index.css';
 import Contact from "./routes/contact.jsx";
 import {Route, Routes} from 'react-router-dom';
-import IVeterinarians from "./components/Veterinarians.tsx";
+import IVeterinarians from "./components/FilesRelatedToVeterinarians/Veterinarians.tsx";
 
 export default function App() {
   
