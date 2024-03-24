@@ -33,7 +33,6 @@ const ClientInfo: React.FC<IClientInfo> = ({ handleDeleteData, post, veterinaria
         console.log(`Selected veterinarian ID for client ${post.id}:`, id);
     };
 
-
     return (
         <div>
             {post?.name}, {post?.phoneNumber}
