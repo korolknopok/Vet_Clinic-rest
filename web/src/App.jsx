@@ -5,22 +5,24 @@ import './css/index.css';
 import Contact from "./routes/contact.jsx";
 import {Route, Routes} from 'react-router-dom';
 import IVeterinarians from "./components/FilesRelatedToVeterinarians/Veterinarians.tsx";
+import {VeterinariansProvider} from "./components/FilesRelatedToVeterinarians/VeterinariansContext.tsx";
+import ClientInfo from "./components/ClientInfo.tsx";
 
 export default function App() {
-  
-  return (
-    <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Content />} />
-        <Route path="/veterinarians" element={<IVeterinarians />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      
-    </>
-    
-  );
+    return (
+        <>
+            <Header />
+            <VeterinariansProvider> {/* Здесь оберните все компоненты, использующие контекст, только один раз */}
+                <Routes>
+                    <Route path="/" element={<Content />} />
+                    <Route path="/veterinarians" element={<IVeterinarians />} />
+                    <Route path="/contact" element={<Contact />} />
+                </Routes>
+            </VeterinariansProvider>
+        </>
+    );
 }
+
 
 
 

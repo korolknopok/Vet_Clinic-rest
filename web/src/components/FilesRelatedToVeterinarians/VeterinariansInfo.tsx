@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction } from 'react';
 // @ts-ignore
 import {Veterinarians} from "../../json/api.ts";
 
+
 interface VeterinariansInfo {
     handleDeleteVetData: (id: string) => void;
     setIsOpen:  Dispatch<SetStateAction<string>>;

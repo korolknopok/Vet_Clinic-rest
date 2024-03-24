@@ -12,7 +12,7 @@ interface VeterinariansInfo {
 }
 
 const VeterInfoPost: React.FC<VeterinariansInfo>  = ({post}) => {
-    var functionFromApi = VeterinariansApiFactory(); 
+    var functionFromApi = VeterinariansApiFactory();
     const [name, setName] = useState(post.name);
     const [phoneNumber, setPhoneNumber] = useState(post.phoneNumber);
     const [dateOfBirth, setDateOfBirth] = useState(post.dateOfBirth);
@@ -26,7 +26,7 @@ const VeterInfoPost: React.FC<VeterinariansInfo>  = ({post}) => {
     };
 
     const handlePostVetData = async () => {
-        
+
         try {
             const response = await functionFromApi.apiVeterinariansPost(veterinarian,  {});
             console.log(response);
