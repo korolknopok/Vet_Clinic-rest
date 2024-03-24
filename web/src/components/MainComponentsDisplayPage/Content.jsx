@@ -1,8 +1,8 @@
-import dog from '../img/dogLast.jpeg'
+import dog from '../../img/dogLast.jpeg'
 import { useState } from 'react';
 import Modal from './Modal';
 import React from 'react';
-import { ClientApiFactory } from '../json/api.ts';
+import { ClientApiFactory } from '../../json/api.ts';
 
 export default function Content() {
     const [modalActive, setModalActive] = useState(false);

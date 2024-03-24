@@ -3,16 +3,16 @@
 import React from "react";
 import { useState } from 'react';
 // @ts-ignore
-import { Veterinarians } from '../json/api.ts';
+import { Veterinarians } from '../../json/api.ts';
 // @ts-ignore
-import {VeterinariansApiFactory} from '../json/api.ts';
+import {VeterinariansApiFactory} from '../../json/api.ts';
 
 interface VeterinariansInfo {
     post: Veterinarians;
 }
 
 const VeterInfoPost: React.FC<VeterinariansInfo>  = ({post}) => {
-    var functionFromApi = VeterinariansApiFactory(); 
+    var functionFromApi = VeterinariansApiFactory();
     const [name, setName] = useState(post.name);
     const [phoneNumber, setPhoneNumber] = useState(post.phoneNumber);
     const [dateOfBirth, setDateOfBirth] = useState(post.dateOfBirth);
@@ -26,7 +26,7 @@ const VeterInfoPost: React.FC<VeterinariansInfo>  = ({post}) => {
     };
 
     const handlePostVetData = async () => {
-        
+
         try {
             const response = await functionFromApi.apiVeterinariansPost(veterinarian,  {});
             console.log(response);

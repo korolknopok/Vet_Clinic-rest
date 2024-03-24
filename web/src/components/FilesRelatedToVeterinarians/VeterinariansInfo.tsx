@@ -4,7 +4,8 @@ import { TiDelete } from "react-icons/ti";
 import { MdOutlineEdit } from "react-icons/md";
 import { Dispatch, SetStateAction } from 'react';
 // @ts-ignore
-import {Veterinarians} from "../json/api.ts";
+import {Veterinarians} from "../../json/api.ts";
+
 
 interface VeterinariansInfo {
     handleDeleteVetData: (id: string) => void;
@@ -28,10 +29,8 @@ const VeterinariansInfo: React.FC<VeterinariansInfo> = ({handleDeleteVetData , p
                     setIsOpen(post.id)
                 }
             }}/>
-            
         </div>
     );
-    
 };
 
 export default VeterinariansInfo
