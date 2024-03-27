@@ -39,7 +39,7 @@ function List() {
     
     return (
         <div>
-            {data.map(post => 
+            {data.map(post =>
                 <div key = {post.id}>
                     <ClientInfo post = {post} handleDeleteData={handleDeleteData} />    
                 </div>
