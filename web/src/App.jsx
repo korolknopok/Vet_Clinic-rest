@@ -6,7 +6,6 @@ import Contact from "./routes/contact.jsx";
 import {Route, Routes} from 'react-router-dom';
 import IVeterinarians from "./components/FilesRelatedToVeterinarians/Veterinarians.tsx";
 import {VeterinariansProvider} from "./components/FilesRelatedToVeterinarians/VeterinariansContext.tsx";
-import ClientInfo from "./components/ClientInfo.tsx";
 
 export default function App() {
     return (
