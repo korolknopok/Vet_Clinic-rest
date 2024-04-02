@@ -11,13 +11,16 @@ interface IClientInfo {
         phoneNumber: string;
     };
 }
+const handleSelect = (id: number) => {
+    console.log(`Выбран ветеринар с id: ${id}`);
+};
 
 const ClientInfo: React.FC<IClientInfo> = ({ handleDeleteData, post}) => {
     const { veterinarians } = useVeterinarians();
     return (
         <div>
             {post?.name}, {post?.phoneNumber}
-            <SelectVet veterinarians={veterinarians} clientId={post.id} onSelect = {() => 5}/>
+            <SelectVet veterinarians={veterinarians} clientId={post.id} onSelect = {handleSelect}/>
             <TiDelete className='styleIcons' onClick={() => handleDeleteData(post.id)} />
         </div>
     );

@@ -5,28 +5,23 @@ import { Veterinarian } from "../json/api.ts";
 interface SelectVetProps {
     veterinarians: Veterinarian[];
     clientId: number;
-    onSelect: (id: number) => void;
+
 }
 
 const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId, onSelect }) => {
-    const [selectedId, setSelectedId] = useState<number | undefined>(localStorage.getItem(`client_${clientId}_vetId`) ? parseInt(localStorage.getItem(`client_${clientId}_vetId`)!) : undefined);
+    const savedId = `client_${clientId}_vetId`;
+    const [selectedId, setSelectedId] = useState<number | undefined>(localStorage.getItem(savedId) ?
+        parseInt(localStorage.getItem(savedId)!) : undefined);
 
     const handleSelectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         const id = event.target.value as number;
         setSelectedId(id);
         onSelect(id);
-        localStorage.setItem(`client_${clientId}_vetId`, id.toString());
+        localStorage.setItem(savedId, id.toString());
     };
 
-    useEffect(() => {
-        const savedId = localStorage.getItem(`client_${clientId}_vetId`);
-        if (savedId) {
-            setSelectedId(parseInt(savedId));
-        }
-    }, [clientId]);
-
     return (
-        <Select value={selectedId} onChange={handleSelectChange}>
+        <Select value = {selectedId} onChange={handleSelectChange}>
             {veterinarians.map((vet) => (
                 <MenuItem key={vet.id} value={vet.id}>
                     {vet.name}
