@@ -6,7 +6,6 @@ import {Veterinarians, VeterinariansApiFactory} from '../../json/api.ts';
 // Создайте тип для контекста
 type VeterinariansContextType = {
     veterinarians: Veterinarians[];
-    setVeterinarians: React.Dispatch<React.SetStateAction<Veterinarians[]>>;
 };
 
 // Создайте контекст
@@ -31,10 +30,8 @@ export const VeterinariansProvider: React.FC = ({ children }) => {
         fetchVeterinarians();
     }, []);
 
-
-
     return (
-        <VeterinariansContext.Provider value={{ veterinarians, setVeterinarians }}>
+        <VeterinariansContext.Provider value={{ veterinarians}}>
             {children}
         </VeterinariansContext.Provider>
     );
