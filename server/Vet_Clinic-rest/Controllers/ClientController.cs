@@ -4,6 +4,8 @@ using System.Collections;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
 using Microsoft.AspNetCore.Cors;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Vet_Clinic_rest.Controllers
@@ -20,41 +22,47 @@ namespace Vet_Clinic_rest.Controllers
             _clients = clients;
         }
 
-
-        /*private static readonly  List<Client> Clients = new(); */
+        
         [HttpGet]
-
         public IActionResult Get()
         {
+            
             var clients = _clients.Clients.Select(client => new ClientDTO
             {
                 Id = client.Id,
                 name = client.name,
                 phoneNumber = client.phoneNumber,
-                veterinarianId = client.veterinarianId
+                veterinarianId = client.veterinarianId,
+                Veterinarian = client.Veterinarian
             });
 
             return Ok(clients);
         }
-
-
-
-        /* public Client GetById(int id)
-         {
-             var clients = _clients.Clients.Find(id);
-             if (clients == null) { throw new KeyNotFoundException("User Not Found"); }
-             return clients;
-         }*/
-
+        
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var emp = _clients.Clients.Find(id);
-            return Ok(emp);
+            var client = _clients.Clients
+                .Include(c => c.Veterinarian)
+                .FirstOrDefault(c => c.Id == id);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            if (client.Veterinarian != null)
+            {
+                return Ok(client);
+            }
+            else
+            {
+                return Ok("Client is not assigned to a veterinarian");
+            }
         }
 
-        
-            
+
+      
         [HttpPost]
         public IActionResult Post([FromBody] Client model)
         {
