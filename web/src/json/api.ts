@@ -98,18 +98,15 @@ export interface Veterinarians {
  * @export
  */
 
-const BASE_URL = 'https://localhost:7205'; // Замените на ваш URL API
+const BASE_URL = 'https://localhost:7205';
 
 export const updateClientVet = async (clientId: number, vetId: number) => {
     try {
-        const response = await axios.post(`${BASE_URL}/api/client/UpdateClient`, {
-            clientId: clientId,
-            vetId: vetId
-        });
+        const response = await axios.post(`${BASE_URL}/api/Client/UpdateClient?clientId=${clientId}&vetId=${vetId}`);
         return response.data;
     } catch (error) {
         console.error('Error updating client vet:', error);
-        throw error; // Можно обработать ошибку здесь или передать ее вверх по стеку вызовов
+        throw error;
     }
 };
 
