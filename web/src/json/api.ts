@@ -22,6 +22,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import type { RequestArgs } from './base.ts';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base.ts';
+import axios from "axios";
 
 /**
  * 
@@ -96,6 +97,22 @@ export interface Veterinarians {
  * ClientApi - axios parameter creator
  * @export
  */
+
+const BASE_URL = 'https://localhost:7205'; // Замените на ваш URL API
+
+export const updateClientVet = async (clientId: number, vetId: number) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/api/client/UpdateClient`, {
+            clientId: clientId,
+            vetId: vetId
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating client vet:', error);
+        throw error; // Можно обработать ошибку здесь или передать ее вверх по стеку вызовов
+    }
+};
+
 export const ClientApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
