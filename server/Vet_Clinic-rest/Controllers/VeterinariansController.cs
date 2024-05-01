@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Cors;
 
 namespace Vet_Clinic_rest.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class VeterinariansController : ControllerBase

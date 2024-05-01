@@ -1,11 +1,9 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Vet_Clinic_rest.Model
 {
     public class Veterinarians
     {
-        
         public int id { get; set; }
         public string name { get; set; }
         public string dateOfBirth { get; set; }

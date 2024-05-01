@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Vet_Clinic_rest.Model;
 
-
 namespace Vet_Clinic_rest.Model
 {
     public class Client
@@ -18,5 +17,4 @@ namespace Vet_Clinic_rest.Model
         
         public Veterinarians Veterinarian { get; set; }
     }
-    
 }

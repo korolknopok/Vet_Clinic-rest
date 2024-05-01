@@ -48,3 +48,4 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
 };
 
 export default SelectVet;
+

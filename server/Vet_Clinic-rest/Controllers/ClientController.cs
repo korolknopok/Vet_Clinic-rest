@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Cors;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Vet_Clinic_rest.Controllers
 {
     [Route("api/[controller]")]

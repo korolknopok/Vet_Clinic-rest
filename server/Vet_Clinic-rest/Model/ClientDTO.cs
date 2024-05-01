@@ -8,7 +8,6 @@ namespace Vet_Clinic_rest.Model
         public string name { get; set; }
         public string phoneNumber { get; set; }
         public int? veterinarianId { get; set; }
-        
         public Veterinarians Veterinarian { get; set; }
     }
 }
