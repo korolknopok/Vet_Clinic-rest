@@ -15,10 +15,12 @@ namespace Vet_Clinic_rest.Controllers
     public class ClientController : ControllerBase
     {
         private ApplicationContext _clients;
+        private readonly ApplicationContext _context;
 
-        public ClientController(ApplicationContext clients)
+        public ClientController(ApplicationContext clients, ApplicationContext context)
         {
             _clients = clients;
+            _context = context;
         }
 
         
@@ -60,7 +62,28 @@ namespace Vet_Clinic_rest.Controllers
             }
         }
 
+        [HttpPost("UpdateClient")]
+        public IActionResult UpdateClient(int clientId, int vetId)
+        {
+            try
+            {
+                var client = _context.Clients.FirstOrDefault(c => c.Id == clientId);
+                if (client == null)
+                {
+                    return NotFound();
+                }
 
+                // Обновляем информацию о ветеринаре клиента
+                client.veterinariansId = vetId;
+                _context.SaveChanges();
+
+                return Ok(new { Message = "Client updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
       
         [HttpPost]
         public IActionResult Post([FromBody] Client model)
