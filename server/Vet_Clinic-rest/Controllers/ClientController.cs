@@ -1,116 +1,83 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using Vet_Clinic_rest.Model;
-using Vet_Clinic_rest.Context;
-using Microsoft.AspNetCore.Cors;
+using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Vet_Clinic_rest.Model;
+using Vet_Clinic_rest.Service;
 
 namespace Vet_Clinic_rest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class ClientController : ControllerBase
     {
-        private ApplicationContext _clients;
-        private readonly ApplicationContext _context;
+        private readonly IClientService _clientService;
 
-        public ClientController(ApplicationContext clients, ApplicationContext context)
+        public ClientController(IClientService clientService)
         {
-            _clients = clients;
-            _context = context;
+            _clientService = clientService ?? throw new ArgumentNullException(nameof(clientService));
         }
 
-        
         [HttpGet]
         public IActionResult Get()
         {
-            
-            var clients = _clients.Clients.Select(client => new ClientDTO
-            {
-                Id = client.Id,
-                name = client.name,
-                phoneNumber = client.phoneNumber,
-                veterinarianId = client.veterinarianId,
-                Veterinarian = client.Veterinarian
-            });
-
+            var clients = _clientService.GetAllClients();
             return Ok(clients);
         }
-        
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var client = _clients.Clients
-                .Include(c => c.Veterinarian)
-                .FirstOrDefault(c => c.Id == id);
-
+            var client = _clientService.GetClientById(id);
             if (client == null)
             {
                 return NotFound();
             }
 
-            if (client.Veterinarian != null)
-            {
-                return Ok(client);
-            }
-            else
-            {
-                return Ok("Client is not assigned to a veterinarian");
-            }
+            return Ok(client);
         }
 
         [HttpPost("UpdateClient")]
         public IActionResult UpdateClient(int clientId, int vetId)
         {
-            try
+            var result = _clientService.UpdateClientVeterinarian(clientId, vetId);
+            if (result)
             {
-                var client = _context.Clients.FirstOrDefault(c => c.Id == clientId);
-                if (client == null)
-                {
-                    return NotFound();
-                }
-
-                // Обновляем информацию о ветеринаре клиента
-                client.veterinariansId = vetId;
-                _context.SaveChanges();
-
                 return Ok(new { Message = "Client updated successfully" });
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return NotFound();
             }
         }
-      
+
         [HttpPost]
         public IActionResult Post([FromBody] Client model)
         {
-
-            var userExist = _clients.Clients.Any(e => e.name == model.name);
-            if (userExist == true)
+            var result = _clientService.CreateClient(model);
+            if (result)
             {
-                return Ok(new { Message = "User Already Created" });
-
+                return Ok(new { Message = "User Created" });
             }
-
-            _clients.Add(model);
-            _clients.SaveChanges();
-
-            return Ok(new { Message = "User Created" });
+            else
+            {
+                return Conflict(new { Message = "User Already Created" });
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var client = await _clients.Clients.FindAsync(id);
-
-            _clients.Clients.Remove(client);
-            _clients.SaveChanges();
-
-            return Ok(new { Message = "User Deleted" });
+            var result = _clientService.DeleteClient(id);
+            if (result)
+            {
+                return Ok(new { Message = "User Deleted" });
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

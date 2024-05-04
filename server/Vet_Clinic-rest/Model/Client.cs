@@ -14,6 +14,7 @@ namespace Vet_Clinic_rest.Model
 
         [ForeignKey("veterinariansId")]
         public int? veterinariansId { get; set; }
+
         
         public Veterinarians Veterinarian { get; set; }
     }
