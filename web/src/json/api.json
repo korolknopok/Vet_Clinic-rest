@@ -92,6 +92,38 @@
         }
       }
     },
+    "/api/Client/UpdateClient": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "vetId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Veterinarians": {
       "get": {
         "tags": [
@@ -105,7 +137,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Veterinarians"
+                    "$ref": "#/components/schemas/Vet"
                   }
                 }
               },
@@ -113,7 +145,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Veterinarians"
+                    "$ref": "#/components/schemas/Vet"
                   }
                 }
               },
@@ -121,7 +153,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Veterinarians"
+                    "$ref": "#/components/schemas/Vet"
                   }
                 }
               }
@@ -137,17 +169,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             }
           }
@@ -202,17 +234,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             }
           }
@@ -242,15 +274,17 @@
             "type": "string",
             "nullable": true
           },
-          "veterinariansId": {
+          "vetId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
+          },
+          "vet": {
+            "$ref": "#/components/schemas/Vet"
           }
         },
         "additionalProperties": false
       },
-      "Veterinarians": {
+      "Vet": {
         "type": "object",
         "properties": {
           "id": {

@@ -16,7 +16,6 @@
 import type { Configuration } from "./configuration.ts";
 import type { RequestArgs } from "./base.ts";
 import type { AxiosInstance, AxiosResponse } from 'axios';
-// @ts-ignore
 import { RequiredError } from "./base.ts";
 
 /**
