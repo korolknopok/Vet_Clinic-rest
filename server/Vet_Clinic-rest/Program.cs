@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Vet_Clinic_rest.Context;
 using Vet_Clinic_rest.Service;
 
@@ -25,7 +24,8 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(b
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<ClientService, ClientService>();
+builder.Services.AddControllers();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

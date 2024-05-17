@@ -19,14 +19,14 @@ namespace Vet_Clinic_rest.Controllers
         }
 
         [HttpGet]
-        public List<Veterinarians> Get()
+        public List<Vet> Get()
         {
             var veterinarians = _veterinarians.Veterinarians;
             return veterinarians.ToList();
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Veterinarians model)
+        public IActionResult Post([FromBody] Vet model)
         {
 
             var veterinarianExist = _veterinarians.Veterinarians.Any(e => e.name == model.name);
@@ -54,7 +54,7 @@ namespace Vet_Clinic_rest.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Veterinarians model)
+        public IActionResult Put(int id, [FromBody] Vet model)
         {
             var veterinarian = _veterinarians.Veterinarians.FirstOrDefault(e => e.id == id);
             if (veterinarian == null)

@@ -12,9 +12,10 @@ namespace Vet_Clinic_rest.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        private readonly IClientService _clientService;
+        
+        private readonly ClientService _clientService;
 
-        public ClientController(IClientService clientService)
+        public ClientController(ClientService clientService)
         {
             _clientService = clientService ?? throw new ArgumentNullException(nameof(clientService));
         }
@@ -22,7 +23,7 @@ namespace Vet_Clinic_rest.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var clients = _clientService.GetAllClients();
+            IEnumerable<ClientDTO> clients = _clientService.GetAllClients();
             return Ok(clients);
         }
 
@@ -35,8 +36,10 @@ namespace Vet_Clinic_rest.Controllers
                 return NotFound();
             }
 
-            return Ok(client);
+            return Ok(new { client, veterinarian = client.Veterinarians });
         }
+
+
 
         [HttpPost("UpdateClient")]
         public IActionResult UpdateClient(int clientId, int vetId)
