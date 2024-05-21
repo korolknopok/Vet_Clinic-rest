@@ -19,8 +19,9 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
                 const { url, options } = await apiClient.apiClientIdGet(clientId);
                 const response = await axios({ ...options, url: `https://localhost:7205${url}` });
                 const clientData = response.data;
-                if (clientData.veterinarian) {
-                    setSelectedVet(clientData.veterinarian);
+                console.log('Client Data:', clientData);
+                if (clientData.veterinarians) {
+                    setSelectedVet(clientData.veterinarians);
                 }
             } catch (error) {
                 console.error('Error fetching client data:', error);
@@ -28,6 +29,8 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
         };
         fetchClientData();
     }, [clientId]);
+
+
 
     const handleSelectChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
         const vetId = event.target.value as number;
