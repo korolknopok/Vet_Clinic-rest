@@ -1,6 +1,4 @@
-﻿using Vet_Clinic_rest.Model;
-
-namespace Vet_Clinic_rest.Controllers
+﻿namespace Vet_Clinic_rest.Controllers
 {
     public class ClientDTO
     {
@@ -8,8 +6,6 @@ namespace Vet_Clinic_rest.Controllers
         public string name { get; set; }
         public string phoneNumber { get; set; }
         public int? veterinarianId { get; set; }
-        public Vet Veterinarians { get; set; }
+        public VetDTO Veterinarians { get; set; }
     }
 }
-
-

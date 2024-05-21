@@ -26,6 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ClientService, ClientService>();
 builder.Services.AddControllers();
+builder.Services.AddScoped<IClientService, ClientService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

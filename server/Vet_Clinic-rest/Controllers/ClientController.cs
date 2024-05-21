@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Vet_Clinic_rest.Context;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Service;
 
@@ -12,18 +12,18 @@ namespace Vet_Clinic_rest.Controllers
     [ApiController]
     public class ClientController : ControllerBase
     {
-        
-        private readonly ClientService _clientService;
+        private readonly IClientService _clientService;
 
-        public ClientController(ClientService clientService)
+        public ClientController(IClientService clientService)
         {
             _clientService = clientService ?? throw new ArgumentNullException(nameof(clientService));
+            
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<ClientDTO> clients = _clientService.GetAllClients();
+            var clients = _clientService.GetAllClients().Select(ClientMapper.ToDTO);
             return Ok(clients);
         }
 
@@ -36,11 +36,10 @@ namespace Vet_Clinic_rest.Controllers
                 return NotFound();
             }
 
-            return Ok(new { client, veterinarian = client.Veterinarians });
+            var clientDto = ClientMapper.ToDTO(client);
+            return Ok(clientDto);
         }
-
-
-
+        
         [HttpPost("UpdateClient")]
         public IActionResult UpdateClient(int clientId, int vetId)
         {
