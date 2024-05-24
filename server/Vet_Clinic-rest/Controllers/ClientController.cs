@@ -21,14 +21,14 @@ namespace Vet_Clinic_rest.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<IEnumerable<ClientDTO>> Get()
         {
             var clients = _clientService.GetAllClients().Select(ClientMapper.ToDTO);
             return Ok(clients);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public ActionResult<ClientDTO> Get(int id)
         {
             var client = _clientService.GetClientById(id);
             if (client == null)
