@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { ClientApiAxiosParamCreator } from '../json/api.ts';
+import httpClient, { ClientApiAxiosParamCreator } from '../json/api.ts';
 import { Veterinarian } from '../json/api.ts';
 import axios from "axios";
 
@@ -13,13 +13,13 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
     const apiClient = ClientApiAxiosParamCreator();
     const [selectedVet, setSelectedVet] = useState<Veterinarian | undefined>(undefined);
 
+
     useEffect(() => {
         const fetchClientData = async () => {
             try {
-                const { url, options } = await apiClient.apiClientIdGet(clientId);
-                const response = await axios({ ...options, url: `https://localhost:7205${url}` });
+                const { url, options } = await apiClient.apiClientIdGet(clientId.toString());
+                const response = await httpClient.request(url, options);
                 const clientData = response.data;
-                console.log('Client Data:', clientData);
                 if (clientData.veterinarians) {
                     setSelectedVet(clientData.veterinarians);
                 }
@@ -29,8 +29,6 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
         };
         fetchClientData();
     }, [clientId]);
-
-
 
     const handleSelectChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
         const vetId = event.target.value as number;

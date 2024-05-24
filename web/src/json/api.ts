@@ -14,7 +14,7 @@
 
 
 import type { Configuration } from './configuration.ts';
-import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import type {AxiosPromise, AxiosInstance, RawAxiosRequestConfig, AxiosResponse, AxiosRequestConfig} from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -23,7 +23,6 @@ import type { RequestArgs } from './base.ts';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base.ts';
 import axios from "axios";
-
 
 /**
  * 
@@ -72,6 +71,30 @@ export const updateClientVet = async (clientId: number, vetId: number) => {
         throw error;
     }
 };
+
+const httpClient = axios.create({
+    baseURL: "https://localhost:7205/".replace(/\/+$/, ""),
+});
+
+export const get = async <T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
+    try {
+        const response = await httpClient.get<T>(url, config);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const post = async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
+    try {
+        const response = await httpClient.post<T>(url, data, config);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export default httpClient;
 /**
  * 
  * @export
@@ -184,6 +207,8 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+
+
         apiClientIdGet: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('apiClientIdGet', 'id', id)
@@ -410,6 +435,8 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
         },
     };
 };
+
+
 
 /**
  * ClientApi - object-oriented interface
