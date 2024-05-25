@@ -22,7 +22,7 @@ import { RequiredError } from "./base.ts";
  *
  * @export
  */
-export const DUMMY_BASE_URL = 'https://localhost:7205'
+export const DUMMY_BASE_URL = 'http://localhost:7205'
 
 /**
  *

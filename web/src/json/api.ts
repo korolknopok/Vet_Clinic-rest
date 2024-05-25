@@ -14,7 +14,7 @@
 
 
 import type { Configuration } from './configuration.ts';
-import type {AxiosPromise, AxiosInstance, RawAxiosRequestConfig, AxiosResponse, AxiosRequestConfig} from 'axios';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -22,7 +22,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import type { RequestArgs } from './base.ts';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base.ts';
-import axios from "axios";
 
 /**
  * 
@@ -61,40 +60,43 @@ export interface Client {
      */
     'vet'?: Vet;
 }
-
-export const updateClientVet = async (clientId: number, vetId: number) => {
-    try {
-        const response = await axios.post('https://localhost:7205/api/Client/UpdateClient?clientId=${clientId}&vetId=${vetId}');
-        return response.data;
-    } catch (error) {
-        console.error('Error updating client vet:', error);
-        throw error;
-    }
-};
-
-const httpClient = axios.create({
-    baseURL: "https://localhost:7205/".replace(/\/+$/, ""),
-});
-
-export const get = async <T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-    try {
-        const response = await httpClient.get<T>(url, config);
-        return response;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const post = async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-    try {
-        const response = await httpClient.post<T>(url, data, config);
-        return response;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export default httpClient;
+/**
+ * 
+ * @export
+ * @interface ClientDTO
+ */
+export interface ClientDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof ClientDTO
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientDTO
+     */
+    'name'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientDTO
+     */
+    'phoneNumber'?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ClientDTO
+     */
+    'veterinarianId'?: number | null;
+    /**
+     * 
+     * @type {VetDTO}
+     * @memberof ClientDTO
+     */
+    'veterinarians'?: VetDTO;
+}
 /**
  * 
  * @export
@@ -131,6 +133,25 @@ export interface Vet {
      * @memberof Vet
      */
     'education'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface VetDTO
+ */
+export interface VetDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof VetDTO
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof VetDTO
+     */
+    'name'?: string | null;
 }
 
 /**
@@ -207,8 +228,6 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-
-
         apiClientIdGet: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('apiClientIdGet', 'id', id)
@@ -298,7 +317,7 @@ export const ClientApiAxiosParamCreator = function (configuration?: Configuratio
             }
 
 
-
+    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -323,7 +342,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ClientDTO>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientGet(options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientGet']?.[index]?.url;
@@ -347,7 +366,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientIdGet(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientIdGet(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientDTO>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientIdGet(id, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientIdGet']?.[index]?.url;
@@ -393,7 +412,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientGet(options?: any): AxiosPromise<void> {
+        apiClientGet(options?: any): AxiosPromise<Array<ClientDTO>> {
             return localVarFp.apiClientGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -411,7 +430,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientIdGet(id: number, options?: any): AxiosPromise<void> {
+        apiClientIdGet(id: number, options?: any): AxiosPromise<ClientDTO> {
             return localVarFp.apiClientIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -435,8 +454,6 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
         },
     };
 };
-
-
 
 /**
  * ClientApi - object-oriented interface
