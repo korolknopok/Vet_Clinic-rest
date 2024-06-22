@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using Vet_Clinic_rest.Context;
 using Vet_Clinic_rest.Model;
@@ -8,6 +10,7 @@ using Vet_Clinic_rest.Service;
 
 namespace Vet_Clinic_rest.Controllers
 {
+    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientController : ControllerBase
@@ -40,6 +43,7 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(clientDto);
         }
         
+        [Authorize]
         [HttpPost("UpdateClient")]
         public IActionResult UpdateClient(int clientId, int vetId)
         {
@@ -54,6 +58,7 @@ namespace Vet_Clinic_rest.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Client model)
         {
@@ -68,6 +73,7 @@ namespace Vet_Clinic_rest.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
