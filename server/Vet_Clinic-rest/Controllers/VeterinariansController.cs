@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
 using Microsoft.AspNetCore.Cors;
 
 namespace Vet_Clinic_rest.Controllers
 {
-
+    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class VeterinariansController : ControllerBase
@@ -19,15 +20,17 @@ namespace Vet_Clinic_rest.Controllers
             _veterinarians = veterinarians;
         }
 
+        [AllowAnonymous]
         [HttpGet]
-        public List<Veterinarians> Get()
+        public List<Vet> Get()
         {
             var veterinarians = _veterinarians.Veterinarians;
             return veterinarians.ToList();
         }
 
+        [Authorize]
         [HttpPost]
-        public IActionResult Post([FromBody] Veterinarians model)
+        public IActionResult Post([FromBody] Vet model)
         {
 
             var veterinarianExist = _veterinarians.Veterinarians.Any(e => e.name == model.name);
@@ -43,7 +46,7 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "Veterinarian Created" });
         }
     
-        
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -55,8 +58,9 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "Veterinarian Deleted" });
         }
 
+        [Authorize]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Veterinarians model)
+        public IActionResult Put(int id, [FromBody] Vet model)
         {
             var veterinarian = _veterinarians.Veterinarians.FirstOrDefault(e => e.id == id);
             if (veterinarian == null)

@@ -5,11 +5,14 @@ using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
 using Microsoft.AspNetCore.Cors;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace Vet_Clinic_rest.Controllers
 {
+    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     
@@ -51,7 +54,16 @@ namespace Vet_Clinic_rest.Controllers
                 return NotFound();
             }
 
-            if (client.Veterinarian != null)
+            var clientDto = ClientMapper.ToDTO(client);
+            return Ok(clientDto);
+        }
+        
+        [Authorize]
+        [HttpPost("UpdateClient")]
+        public IActionResult UpdateClient(int clientId, int vetId)
+        {
+            var result = _clientService.UpdateClientVeterinarian(clientId, vetId);
+            if (result)
             {
                 return Ok(client);
             }
@@ -61,8 +73,7 @@ namespace Vet_Clinic_rest.Controllers
             }
         }
 
-
-      
+        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Client model)
         {
@@ -80,6 +91,7 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "User Created" });
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
