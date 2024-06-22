@@ -42,7 +42,8 @@ namespace Vet_Clinic_rest.Controllers
 
             return Ok(new { Message = "Veterinarian Created" });
         }
-
+    
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
