@@ -32,7 +32,7 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
         if (selected) {
             setSelectedVet(selected);
             try {
-                await clientApi.apiClientUpdateClientPost(clientId, { veterinarianId: vetId });
+                await clientApi.apiClientUpdateClientPost(clientId, vetId);
             } catch (error) {
                 console.error('Error updating client veterinarian:', error.message);
             }
