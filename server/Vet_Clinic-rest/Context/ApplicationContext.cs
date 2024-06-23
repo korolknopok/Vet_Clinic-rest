@@ -14,7 +14,5 @@ namespace Vet_Clinic_rest.Context
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Vet> Veterinarians { get; set; }
-        
-        public DbSet<User> User { get; set; }
     }
 }
