@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
+using Microsoft.AspNetCore.Authorization;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
 using Microsoft.AspNetCore.Cors;
 
 namespace Vet_Clinic_rest.Controllers
 {
+    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class VeterinariansController : ControllerBase
@@ -18,6 +20,7 @@ namespace Vet_Clinic_rest.Controllers
             _veterinarians = veterinarians;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public List<Vet> Get()
         {
@@ -25,6 +28,7 @@ namespace Vet_Clinic_rest.Controllers
             return veterinarians.ToList();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Vet model)
         {
@@ -42,7 +46,7 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "Veterinarian Created" });
         }
     
-        
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -54,6 +58,7 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "Veterinarian Deleted" });
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Vet model)
         {
