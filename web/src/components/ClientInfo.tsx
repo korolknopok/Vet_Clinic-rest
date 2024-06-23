@@ -27,3 +27,4 @@ const ClientInfo: React.FC<IClientInfo> = ({ handleDeleteData, post}) => {
 };
 
 export default ClientInfo;
+

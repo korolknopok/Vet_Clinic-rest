@@ -12,7 +12,33 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientDTO"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -65,7 +91,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientDTO"
+                }
+              }
+            }
           }
         }
       },
@@ -92,6 +135,38 @@
         }
       }
     },
+    "/api/Client/UpdateClient": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "vetId",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Veterinarians": {
       "get": {
         "tags": [
@@ -105,7 +180,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Veterinarians"
+                    "$ref": "#/components/schemas/Vet"
                   }
                 }
               },
@@ -113,7 +188,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Veterinarians"
+                    "$ref": "#/components/schemas/Vet"
                   }
                 }
               },
@@ -121,7 +196,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Veterinarians"
+                    "$ref": "#/components/schemas/Vet"
                   }
                 }
               }
@@ -137,17 +212,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             }
           }
@@ -202,17 +277,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Veterinarians"
+                "$ref": "#/components/schemas/Vet"
               }
             }
           }
@@ -242,15 +317,43 @@
             "type": "string",
             "nullable": true
           },
-          "veterinariansId": {
+          "vetId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
+          },
+          "vet": {
+            "$ref": "#/components/schemas/Vet"
           }
         },
         "additionalProperties": false
       },
-      "Veterinarians": {
+      "ClientDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "veterinarianId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "veterinarians": {
+            "$ref": "#/components/schemas/VetDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Vet": {
         "type": "object",
         "properties": {
           "id": {
@@ -270,6 +373,20 @@
             "nullable": true
           },
           "education": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VetDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
             "type": "string",
             "nullable": true
           }

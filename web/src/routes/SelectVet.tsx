@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
-import { updateClientVet } from '../json/api.ts';
-import { Veterinarian } from '../json/api.ts';
+import { ClientApi, Veterinarian } from '../json/api.ts';
 
 interface SelectVetProps {
     veterinarians: Veterinarian[];
@@ -9,21 +8,21 @@ interface SelectVetProps {
 }
 
 const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
+    const clientApi = new ClientApi();
     const [selectedVet, setSelectedVet] = useState<Veterinarian | undefined>(undefined);
 
     useEffect(() => {
         const fetchClientData = async () => {
             try {
-                const response = await fetch(`https://localhost:7205/api/Client/${clientId}`);
-                const clientData = await response.json();
-                if (clientData.veterinarian) {
-                    setSelectedVet(clientData.veterinarian);
+                const response = await clientApi.apiClientIdGet(clientId);
+                const clientData = response.data;
+                if (clientData.veterinarians) {
+                    setSelectedVet(clientData.veterinarians);
                 }
             } catch (error) {
-                console.error('Error fetching client data:', error);
+                console.error('Error fetching client data:', error.message);
             }
         };
-
         fetchClientData();
     }, [clientId]);
 
@@ -32,7 +31,11 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
         const selected = veterinarians.find(vet => vet.id === vetId);
         if (selected) {
             setSelectedVet(selected);
-            await updateClientVet(clientId, vetId);
+            try {
+                await clientApi.apiClientUpdateClientPost(clientId, { veterinarianId: vetId });
+            } catch (error) {
+                console.error('Error updating client veterinarian:', error.message);
+            }
         }
     };
 

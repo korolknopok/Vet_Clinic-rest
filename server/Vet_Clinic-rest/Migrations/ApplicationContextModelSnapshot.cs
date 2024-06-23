@@ -40,10 +40,9 @@ namespace Vet_Clinic_rest.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("veterinariansId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Clients");
                 });
@@ -71,7 +70,7 @@ namespace Vet_Clinic_rest.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Vet_Clinic_rest.Model.Veterinarians", b =>
+            modelBuilder.Entity("Vet_Clinic_rest.Model.Vet", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
