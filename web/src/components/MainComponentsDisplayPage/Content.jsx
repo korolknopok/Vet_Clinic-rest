@@ -10,7 +10,7 @@ export default function Content() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [veterinarianId, setVeterinarianId] = useState("");
 
-    var f = ClientApiFactory();
+    let f = ClientApiFactory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -90,15 +90,6 @@ export default function Content() {
                                 className="input"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                            />
-                            <input
-                                type="text"
-                                required
-                                placeholder="айди ветеринара"
-                                id="idvet"
-                                className="input"
-                                value={veterinarianId}
-                                onChange={(e) => setVeterinarianId(e.target.value)}
                             />
                             <button id="btn" type="submit" >Записаться</button>
                         </form>

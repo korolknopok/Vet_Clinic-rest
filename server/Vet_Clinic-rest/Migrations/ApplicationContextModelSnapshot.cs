@@ -30,6 +30,9 @@ namespace Vet_Clinic_rest.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("VetId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -38,15 +41,14 @@ namespace Vet_Clinic_rest.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("veterinariansId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Vet_Clinic_rest.Model.Veterinarians", b =>
+            modelBuilder.Entity("Vet_Clinic_rest.Model.Vet", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -73,6 +75,15 @@ namespace Vet_Clinic_rest.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Veterinarians");
+                });
+
+            modelBuilder.Entity("Vet_Clinic_rest.Model.Client", b =>
+                {
+                    b.HasOne("Vet_Clinic_rest.Model.Vet", "Vet")
+                        .WithMany()
+                        .HasForeignKey("VetId");
+
+                    b.Navigation("Vet");
                 });
 #pragma warning restore 612, 618
         }

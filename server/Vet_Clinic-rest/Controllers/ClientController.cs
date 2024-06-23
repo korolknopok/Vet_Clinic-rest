@@ -1,86 +1,85 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using Vet_Clinic_rest.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Vet_Clinic_rest.Context;
-using Microsoft.AspNetCore.Cors;
-
+using Vet_Clinic_rest.Model;
+using Vet_Clinic_rest.Service;
 
 namespace Vet_Clinic_rest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class ClientController : ControllerBase
     {
-        private ApplicationContext _clients;
+        private readonly IClientService _clientService;
 
-        public ClientController(ApplicationContext clients)
+        public ClientController(IClientService clientService)
         {
-            _clients = clients;
+            _clientService = clientService ?? throw new ArgumentNullException(nameof(clientService));
+            
         }
 
-
-        /*private static readonly  List<Client> Clients = new(); */
         [HttpGet]
-
-        public IActionResult Get()
+        public ActionResult<IEnumerable<ClientDTO>> Get()
         {
-            var clients = _clients.Clients.Select(client => new ClientDTO
-            {
-                Id = client.Id,
-                name = client.name,
-                phoneNumber = client.phoneNumber,
-                veterinarianId = client.veterinarianId
-            });
-
+            var clients = _clientService.GetAllClients().Select(ClientMapper.ToDTO);
             return Ok(clients);
         }
 
-
-
-        /* public Client GetById(int id)
-         {
-             var clients = _clients.Clients.Find(id);
-             if (clients == null) { throw new KeyNotFoundException("User Not Found"); }
-             return clients;
-         }*/
-
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public ActionResult<ClientDTO> Get(int id)
         {
-            var emp = _clients.Clients.Find(id);
-            return Ok(emp);
+            var client = _clientService.GetClientById(id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            var clientDto = ClientMapper.ToDTO(client);
+            return Ok(clientDto);
+        }
+        
+        [HttpPost("UpdateClient")]
+        public IActionResult UpdateClient(int clientId, int vetId)
+        {
+            var result = _clientService.UpdateClientVeterinarian(clientId, vetId);
+            if (result)
+            {
+                return Ok(new { Message = "Client updated successfully" });
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
-        
-            
         [HttpPost]
         public IActionResult Post([FromBody] Client model)
         {
-
-            var userExist = _clients.Clients.Any(e => e.name == model.name);
-            if (userExist == true)
+            var result = _clientService.CreateClient(model);
+            if (result)
             {
-                return Ok(new { Message = "User Already Created" });
-
+                return Ok(new { Message = "User Created" });
             }
-
-            _clients.Add(model);
-            _clients.SaveChanges();
-
-            return Ok(new { Message = "User Created" });
+            else
+            {
+                return Conflict(new { Message = "User Already Created" });
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var client = await _clients.Clients.FindAsync(id);
-
-            _clients.Clients.Remove(client);
-            _clients.SaveChanges();
-
-            return Ok(new { Message = "User Deleted" });
+            var result = _clientService.DeleteClient(id);
+            if (result)
+            {
+                return Ok(new { Message = "User Deleted" });
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

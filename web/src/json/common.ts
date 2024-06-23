@@ -16,14 +16,13 @@
 import type { Configuration } from "./configuration.ts";
 import type { RequestArgs } from "./base.ts";
 import type { AxiosInstance, AxiosResponse } from 'axios';
-// @ts-ignore
 import { RequiredError } from "./base.ts";
 
 /**
  *
  * @export
  */
-export const DUMMY_BASE_URL = 'https://localhost:7205'
+export const DUMMY_BASE_URL = 'http://localhost:7205'
 
 /**
  *
