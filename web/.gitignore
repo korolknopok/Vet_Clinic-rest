@@ -366,6 +366,7 @@ FodyWeavers.xsd
 
 /.vs/*
 /.vs/Vet_Clinic-rest/v17/.suo
-web/node_modules
+/web/node_modules
 
+**/web/node_modules/
 
