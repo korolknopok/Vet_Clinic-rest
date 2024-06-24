@@ -102,7 +102,7 @@ export default function Header() {
             </div>
             <div className="flex-navigation item-6">
               <div className="flex-items item-1" onClick={isLoggedIn ? handleLogout : openModal}>
-                {isLoggedIn ? `${userName}` : 'Вход'}
+                {isLoggedIn ? `(${userName})` : 'Вход'}
               </div>
             </div>
           </div>
