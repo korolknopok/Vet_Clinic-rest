@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
 import Modal from './Modal';
+
 export default function Header() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isRegistering, setIsRegistering] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState("");
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -15,9 +17,11 @@ export default function Header() {
             setIsLoggedIn(true);
         }
     }, []);
+
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
     const toggleRegistering = () => setIsRegistering(!isRegistering);
+
     const handleAuth = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -49,12 +53,14 @@ export default function Header() {
             console.error('Ошибка:', error);
         }
     };
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userName');
         setIsLoggedIn(false);
         setUserName("");
     };
+
     return (
         <div className="column">
             <div className="header row">
@@ -68,16 +74,20 @@ export default function Header() {
                         </div>
                     </div>
                     <div className="flex-items item-2">Отзывы</div>
-                    <div className="flex-items item-3">
-                        <div className="item">
-                            <NavLink to="/veterinarians">Ветеринары</NavLink>
-                        </div>
-                    </div>
-                    <div className="flex-items item-1">
-                        <div className="item">
-                            <NavLink to="/contact">Записи</NavLink>
-                        </div>
-                    </div>
+                    {isLoggedIn && (
+                        <>
+                            <div className="flex-items item-3">
+                                <div className="item">
+                                    <NavLink to="/veterinarians">Ветеринары</NavLink>
+                                </div>
+                            </div>
+                            <div className="flex-items item-1">
+                                <div className="item">
+                                    <NavLink to="/contact">Записи</NavLink>
+                                </div>
+                            </div>
+                        </>
+                    )}
                     <div id="detail">
                         <Outlet />
                     </div>

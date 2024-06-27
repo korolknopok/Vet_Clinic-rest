@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 // @ts-ignore
 import VeterinariansInfo from './VeterinariansInfo.tsx';
 // @ts-ignore
@@ -7,7 +7,7 @@ import VeterInfoPost from "./VeterInfoPost.tsx";
 // @ts-ignore
 import VeterInfoPut from "./VeterInfoPut.tsx";
 // @ts-ignore
-import { Veterinarians, VeterinariansApi } from "../../json/api.ts";
+import {Veterinarians, VeterinariansApi} from "../../json/api.ts";
 
 function IVeterinarians() {
     const api = new VeterinariansApi();
@@ -25,32 +25,28 @@ function IVeterinarians() {
 
     async function getVetDataFromApi() {
         const response = await api.apiVeterinariansGet();
-        const { data: dataResponse } = response;
+        const {data: dataResponse} = response;
         setData(dataResponse);
     }
 
     const handleDeleteVetData = (id: number) => {
-        if (isLoggedIn) {
-            api.apiVeterinariansIdDelete(id)
-                .then(response => {
-                    if (response.status == 200) {
-                        console.log('Данные успешно удалены');
-                        getVetDataFromApi();
-                    } else {
-                        console.log('Ошибка при удалении данных');
-                    }
-                })
-                .catch(error => {
-                    console.log('Ошибка при удалении данных:', error);
-                });
-        } else {
-            console.error('Неавторизованные пользователи не могут удалять данные');
-        }
+        api.apiVeterinariansIdDelete(id)
+            .then(response => {
+                if (response.status == 200) {
+                    console.log('Данные успешно удалены');
+                    getVetDataFromApi();
+                } else {
+                    console.log('Ошибка при удалении данных');
+                }
+            })
+            .catch(error => {
+                console.log('Ошибка при удалении данных:', error);
+            });
     }
 
     return (
         <div>
-            {isLoggedIn && <VeterInfoPost post={data} />}
+            {isLoggedIn && <VeterInfoPost post={data}/>}
             Список ветеринаров:
             <div>
                 {data.map(post =>

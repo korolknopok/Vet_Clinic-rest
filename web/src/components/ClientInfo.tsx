@@ -35,10 +35,6 @@ const ClientInfo: React.FC<IClientInfo> = ({ handleDeleteData, post }) => {
         }
     }
 
-    if (!isLoggedIn) {
-        return null; // Ничего не отображаем для неавторизованных пользователей
-    }
-
     return (
         <div>
             {post?.name}, {post?.phoneNumber}
