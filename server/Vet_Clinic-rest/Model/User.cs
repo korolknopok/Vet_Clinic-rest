@@ -7,15 +7,15 @@ namespace Vet_Clinic_rest.Model
     public class User
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string login { get; set; }
+        public string Login { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string password { get; set; }
+        public string Password { get; set; }
         
     }
 }

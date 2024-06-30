@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using Microsoft.AspNetCore.Authorization;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
-using Microsoft.AspNetCore.Cors;
 
 namespace Vet_Clinic_rest.Controllers
 {
-    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     [ApiController]
     public class VeterinariansController : ControllerBase
@@ -20,7 +16,6 @@ namespace Vet_Clinic_rest.Controllers
             _veterinarians = veterinarians;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public List<Vet> Get()
         {
@@ -28,12 +23,11 @@ namespace Vet_Clinic_rest.Controllers
             return veterinarians.ToList();
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Vet model)
         {
 
-            var veterinarianExist = _veterinarians.Veterinarians.Any(e => e.name == model.name);
+            var veterinarianExist = _veterinarians.Veterinarians.Any(e => e.Name == model.Name);
             if (veterinarianExist == true)
             {
                 return Ok(new { Message = "Veterinarian Already Created" });
@@ -45,8 +39,7 @@ namespace Vet_Clinic_rest.Controllers
 
             return Ok(new { Message = "Veterinarian Created" });
         }
-    
-        [Authorize]
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -58,7 +51,6 @@ namespace Vet_Clinic_rest.Controllers
             return Ok(new { Message = "Veterinarian Deleted" });
         }
 
-        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Vet model)
         {
@@ -67,10 +59,10 @@ namespace Vet_Clinic_rest.Controllers
             {
                 return NotFound();
             }
-            veterinarian.name = model.name;
-            veterinarian.phoneNumber = model.phoneNumber;
-            veterinarian.dateOfBirth = model.dateOfBirth;
-            veterinarian.education = model.education;
+            veterinarian.Name = model.Name;
+            veterinarian.PhoneNumber = model.PhoneNumber;
+            veterinarian.DateOfBirth = model.DateOfBirth;
+            veterinarian.Education = model.Education;
 
             _veterinarians.SaveChanges();
 

@@ -23,7 +23,7 @@ namespace Vet_Clinic_rest.Controllers
         {
             try
             {
-                var existingUser = await _context.User.FirstOrDefaultAsync(u => u.login == loginDto.login);
+                var existingUser = await _context.User.FirstOrDefaultAsync(u => u.Login == loginDto.Login);
                 if (existingUser != null)
                 {
                     return Conflict("User with this login already exists.");
@@ -31,8 +31,8 @@ namespace Vet_Clinic_rest.Controllers
 
                 var newUser = new User
                 {
-                    login = loginDto.login,
-                    password = loginDto.password
+                    Login = loginDto.Login,
+                    Password = loginDto.Password
                 };
 
                 _context.User.Add(newUser);
@@ -49,7 +49,7 @@ namespace Vet_Clinic_rest.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var user = await _context.User.FirstOrDefaultAsync(u => u.login == loginDto.login);
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Login == loginDto.Login);
             if (user == null)
             {
                 return Unauthorized("Invalid login or password.");

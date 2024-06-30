@@ -41,7 +41,7 @@ namespace Vet_Clinic_rest.Service
 
         public bool CreateClient(Client client)
         {
-            if (_context.Clients.Any(e => e.name == client.name))
+            if (_context.Clients.Any(e => e.Name == client.Name))
             {
                 return false;
             }

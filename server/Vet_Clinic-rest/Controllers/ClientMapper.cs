@@ -10,10 +10,10 @@ namespace Vet_Clinic_rest.Controllers
             return new ClientDTO
             {
                 Id = client.Id,
-                name = client.name,
-                phoneNumber = client.phoneNumber,
+                name = client.Name,
+                phoneNumber = client.PhoneNumber,
                 veterinarianId = client.VetId,
-                Veterinarians = client.Vet != null ? new VetDTO { Id = client.Vet.id, Name = client.Vet.name } : null
+                Veterinarians = client.Vet != null ? new VetDTO { Id = client.Vet.id, Name = client.Vet.Name } : null
             };
         }
     }
