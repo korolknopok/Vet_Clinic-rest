@@ -29,6 +29,8 @@ namespace Vet_Clinic_rest.Controllers
                     return Conflict("User with this login already exists.");
                 }
 
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(loginDto.Password);
+
                 var newUser = new User
                 {
                     Login = loginDto.Login,
@@ -51,6 +53,11 @@ namespace Vet_Clinic_rest.Controllers
         {
             var user = await _context.User.FirstOrDefaultAsync(u => u.Login == loginDto.Login);
             if (user == null)
+            {
+                return Unauthorized("Invalid login or password.");
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
             {
                 return Unauthorized("Invalid login or password.");
             }
