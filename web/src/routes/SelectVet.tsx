@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+// @ts-ignore
+import React, { useEffect, useState } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
+// @ts-ignore
 import { ClientApi, Veterinarian } from '../json/api.ts';
+// @ts-ignore
+import { useVeterinarians } from "../components/FilesRelatedToVeterinarians/VeterinariansContext.tsx";
 
 interface SelectVetProps {
-    veterinarians: Veterinarian[];
     clientId: number;
 }
 
-const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
+const SelectVet: React.FC<SelectVetProps> = ({ clientId }) => {
+    const { veterinarians, isLoggedIn } = useVeterinarians();
     const clientApi = new ClientApi();
     const [selectedVet, setSelectedVet] = useState<Veterinarian | undefined>(undefined);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsLoggedIn(true);
+        if (isLoggedIn) {
             fetchClientData();
         }
-    }, [clientId]);
+    }, [clientId, isLoggedIn]);
 
     const fetchClientData = async () => {
         try {
@@ -49,6 +50,8 @@ const SelectVet: React.FC<SelectVetProps> = ({ veterinarians, clientId }) => {
             console.error('Неавторизованные пользователи не могут изменять данные');
         }
     };
+
+    if (veterinarians.length === 0) return null;
 
     return (
         <Select value={selectedVet?.id || ''} onChange={handleSelectChange}>
