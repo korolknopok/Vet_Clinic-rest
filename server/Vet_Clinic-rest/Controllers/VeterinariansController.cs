@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Context;
-using Microsoft.AspNetCore.Cors;
 
 namespace Vet_Clinic_rest.Controllers
 {
@@ -29,7 +27,7 @@ namespace Vet_Clinic_rest.Controllers
         public IActionResult Post([FromBody] Vet model)
         {
 
-            var veterinarianExist = _veterinarians.Veterinarians.Any(e => e.name == model.name);
+            var veterinarianExist = _veterinarians.Veterinarians.Any(e => e.Name == model.Name);
             if (veterinarianExist == true)
             {
                 return Ok(new { Message = "Veterinarian Already Created" });
@@ -61,10 +59,10 @@ namespace Vet_Clinic_rest.Controllers
             {
                 return NotFound();
             }
-            veterinarian.name = model.name;
-            veterinarian.phoneNumber = model.phoneNumber;
-            veterinarian.dateOfBirth = model.dateOfBirth;
-            veterinarian.education = model.education;
+            veterinarian.Name = model.Name;
+            veterinarian.PhoneNumber = model.PhoneNumber;
+            veterinarian.DateOfBirth = model.DateOfBirth;
+            veterinarian.Education = model.Education;
 
             _veterinarians.SaveChanges();
 

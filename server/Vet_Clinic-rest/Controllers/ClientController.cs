@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Vet_Clinic_rest.Context;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Vet_Clinic_rest.Model;
 using Vet_Clinic_rest.Service;
 
@@ -41,7 +38,7 @@ namespace Vet_Clinic_rest.Controllers
         }
         
         [HttpPost("UpdateClient")]
-        public IActionResult UpdateClient(int clientId, int vetId)
+        public ActionResult<ClientDTO> UpdateClient(int clientId, int vetId)
         {
             var result = _clientService.UpdateClientVeterinarian(clientId, vetId);
             if (result)
