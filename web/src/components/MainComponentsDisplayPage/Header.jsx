@@ -3,8 +3,10 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
 import Modal from './Modal';
 import {useAuth} from "../Authorization/AuthContext.tsx";
+import {AuthApi} from "../../json/api.ts";
 
 export default function Header() {
+    const authApi = new AuthApi();
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isRegistering, setIsRegistering] = useState(false);
     const { isLoggedIn, userName, login, logout } = useAuth();
@@ -21,15 +23,15 @@ export default function Header() {
             password: formData.get('password'),
         };
         try {
-            const response = await fetch(`https://localhost:7205/api/Auth/${isRegistering ? 'register' : 'login'}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(authData),
-            });
-            if (response.ok) {
-                const data = await response.json();
+            let response;
+            if (isRegistering) {
+                response = await authApi.apiAuthRegisterPost(authData);
+            } else {
+                response = await authApi.apiAuthLoginPost(authData);
+            }
+
+            if (response.status === 200) {
+                const data = response.data;
                 if (!isRegistering) {
                     login(authData.login, data.token);
                 }
@@ -41,6 +43,7 @@ export default function Header() {
             console.error('Ошибка:', error);
         }
     };
+
 
     return (
         <div className="column">

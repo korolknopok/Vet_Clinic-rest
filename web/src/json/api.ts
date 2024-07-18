@@ -100,6 +100,25 @@ export interface ClientDTO {
 /**
  * 
  * @export
+ * @interface LoginDto
+ */
+export interface LoginDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginDto
+     */
+    'login'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginDto
+     */
+    'password'?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface Vet
  */
 export interface Vet {
@@ -153,6 +172,175 @@ export interface VetDTO {
      */
     'name'?: string | null;
 }
+
+/**
+ * AuthApi - axios parameter creator
+ * @export
+ */
+export const AuthApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {LoginDto} [loginDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthLoginPost: async (loginDto?: LoginDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Auth/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {LoginDto} [loginDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthRegisterPost: async (loginDto?: LoginDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Auth/register`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AuthApi - functional programming interface
+ * @export
+ */
+export const AuthApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {LoginDto} [loginDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiAuthLoginPost(loginDto?: LoginDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthLoginPost(loginDto, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthApi.apiAuthLoginPost']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {LoginDto} [loginDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiAuthRegisterPost(loginDto?: LoginDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiAuthRegisterPost(loginDto, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthApi.apiAuthRegisterPost']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AuthApi - factory interface
+ * @export
+ */
+export const AuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuthApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {LoginDto} [loginDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthLoginPost(loginDto?: LoginDto, options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthLoginPost(loginDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {LoginDto} [loginDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiAuthRegisterPost(loginDto?: LoginDto, options?: any): AxiosPromise<void> {
+            return localVarFp.apiAuthRegisterPost(loginDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AuthApi - object-oriented interface
+ * @export
+ * @class AuthApi
+ * @extends {BaseAPI}
+ */
+export class AuthApi extends BaseAPI {
+    /**
+     * 
+     * @param {LoginDto} [loginDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public apiAuthLoginPost(loginDto?: LoginDto, options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).apiAuthLoginPost(loginDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {LoginDto} [loginDto] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public apiAuthRegisterPost(loginDto?: LoginDto, options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).apiAuthRegisterPost(loginDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
 
 /**
  * ClientApi - axios parameter creator
@@ -391,7 +579,7 @@ export const ClientApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiClientUpdateClientPost(clientId?: number, vetId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async apiClientUpdateClientPost(clientId?: number, vetId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientDTO>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiClientUpdateClientPost(clientId, vetId, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['ClientApi.apiClientUpdateClientPost']?.[index]?.url;
@@ -449,7 +637,7 @@ export const ClientApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiClientUpdateClientPost(clientId?: number, vetId?: number, options?: any): AxiosPromise<void> {
+        apiClientUpdateClientPost(clientId?: number, vetId?: number, options?: any): AxiosPromise<ClientDTO> {
             return localVarFp.apiClientUpdateClientPost(clientId, vetId, options).then((request) => request(axios, basePath));
         },
     };
