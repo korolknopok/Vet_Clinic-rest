@@ -8,31 +8,31 @@ import VeterInfoPost from "./VeterInfoPost.tsx";
 import VeterInfoPut from "./VeterInfoPut.tsx";
 // @ts-ignore
 import {Veterinarians, VeterinariansApi} from "../../json/api.ts";
+// @ts-ignore
+import {useAuth} from "../Authorization/AuthContext.tsx";
 
 function IVeterinarians() {
     const api = new VeterinariansApi();
-    const [open, setIsOpen] = useState();
+    const { isLoggedIn } = useAuth();
+    const [open, setIsOpen] = useState<number | null>(null);
     const [data, setData] = useState<Veterinarians[]>([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsLoggedIn(true);
+        if (isLoggedIn) {
             getVetDataFromApi();
         }
-    }, []);
+    }, [isLoggedIn]);
 
     async function getVetDataFromApi() {
         const response = await api.apiVeterinariansGet();
-        const {data: dataResponse} = response;
+        const { data: dataResponse } = response;
         setData(dataResponse);
     }
 
     const handleDeleteVetData = (id: number) => {
         api.apiVeterinariansIdDelete(id)
             .then(response => {
-                if (response.status == 200) {
+                if (response.status === 200) {
                     console.log('Данные успешно удалены');
                     getVetDataFromApi();
                 } else {
@@ -42,22 +42,19 @@ function IVeterinarians() {
             .catch(error => {
                 console.log('Ошибка при удалении данных:', error);
             });
-    }
+    };
 
     return (
         <div>
-            {isLoggedIn && <VeterInfoPost post={data}/>}
+            {isLoggedIn && <VeterInfoPost post={data} />}
             Список ветеринаров:
             <div>
-                {data.map(post =>
+                {data.map(post => (
                     <div key={post.id}>
-                        <VeterinariansInfo post={post} handleDeleteVetData={handleDeleteVetData} setIsOpen={setIsOpen}
-                                           open={open}/>
-                        {open === post.id && isLoggedIn && (
-                            <VeterInfoPut post={post}/>
-                        )}
+                        <VeterinariansInfo post={post} handleDeleteVetData={handleDeleteVetData} setIsOpen={setIsOpen} open={open} />
+                        {open === post.id && isLoggedIn && <VeterInfoPut post={post} />}
                     </div>
-                )}
+                ))}
             </div>
         </div>
     );
