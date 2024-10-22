@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
 import Modal from './Modal';
+import {useAuth} from "../Authorization/AuthContext.tsx";
+import {AuthApi} from "../../json/api.ts";
 
 export default function Header() {
+    const authApi = new AuthApi();
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [isRegistering, setIsRegistering] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState("");
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const storedUserName = localStorage.getItem('userName');
-            setUserName(storedUserName);
-            setIsLoggedIn(true);
-        }
-    }, []);
+    const { isLoggedIn, userName, login, logout } = useAuth();
 
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
@@ -30,20 +23,17 @@ export default function Header() {
             password: formData.get('password'),
         };
         try {
-            const response = await fetch(`https://localhost:7205/api/Auth/${isRegistering ? 'register' : 'login'}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(authData),
-            });
-            if (response.ok) {
-                const data = await response.json();
+            let response;
+            if (isRegistering) {
+                response = await authApi.apiAuthRegisterPost(authData);
+            } else {
+                response = await authApi.apiAuthLoginPost(authData);
+            }
+
+            if (response.status === 200) {
+                const data = response.data;
                 if (!isRegistering) {
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('userName', authData.login);
-                    setIsLoggedIn(true);
-                    setUserName(authData.login);
+                    login(authData.login, data.token);
                 }
                 closeModal();
             } else {
@@ -54,12 +44,6 @@ export default function Header() {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userName');
-        setIsLoggedIn(false);
-        setUserName("");
-    };
 
     return (
         <div className="column">
@@ -103,7 +87,7 @@ export default function Header() {
                         <AiFillPhone className="styleIcons" /> +7(950)-585-60-34
                     </div>
                     <div className="flex-navigation item-6">
-                        <div className="flex-items item-1" onClick={isLoggedIn ? handleLogout : openModal}>
+                        <div className="flex-items item-1" onClick={isLoggedIn ? logout : openModal}>
                             {isLoggedIn ? `${userName}` : 'Вход'}
                         </div>
                     </div>
