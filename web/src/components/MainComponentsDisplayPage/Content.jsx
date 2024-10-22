@@ -18,8 +18,16 @@ export default function Content() {
         const data = {
             name: name,
             phoneNumber: phoneNumber,
-            veterinarianId: veterinarianId,
+            vetId: veterinarianId,
+            vet: {
+                id: 0, // Здесь может быть динамическое значение или же передавайте 0
+                name: "", // Добавьте имя или оставьте пустым
+                dateOfBirth: "", // Можете указать примерную дату или оставить пустым
+                phoneNumber: "", // Введите номер телефона или оставьте пустым
+                education: "" // Можете указать или оставить пустым
+            }
         };
+
         const options = {
             
             method: 'POST',
@@ -90,6 +98,15 @@ export default function Content() {
                                 className="input"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                required
+                                placeholder="ID Ветеринара"
+                                id="vetId"
+                                className="input"
+                                value={veterinarianId}
+                                onChange={(e) => setVeterinarianId(e.target.value)}
                             />
                             <button id="btn" type="submit" >Записаться</button>
                         </form>
