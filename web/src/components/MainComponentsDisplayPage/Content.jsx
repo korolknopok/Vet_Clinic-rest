@@ -1,7 +1,6 @@
-import dog from '../../img/dogLast.jpeg'
-import { useState } from 'react';
-import Modal from './Modal';
-import React from 'react';
+import React, { useState } from 'react';
+import {Typography, Button, TextField, Modal, Paper, Stack } from '@mui/material';
+import dog from '../../img/dogLast.jpeg';
 import { ClientApiFactory } from '../../json/api.ts';
 
 export default function Content() {
@@ -29,11 +28,11 @@ export default function Content() {
         };
 
         const options = {
-            
+
             method: 'POST',
             headers: {
-            'Content-Type': 'application/json',
-            
+                'Content-Type': 'application/json',
+
             },
             body: JSON.stringify(data),
         };
@@ -54,66 +53,71 @@ export default function Content() {
             <div className='presentation'>
                 <img  src={dog}/>
             </div>
-        <div className='blockright'>
-            <label className='labelmetod'> 
-                <ul>
-                    NEW
-                </ul>
-                Современные методы обследования
-            </label>
+            <div className='blockright'>
+                <label className='labelmetod'>
+                    <ul>
+                        NEW
+                    </ul>
+                    Современные методы обследования
+                </label>
                 <label className='labelvetclinic'>
-                <div>Круглосуточная</div>
-                <div>ветеринарная</div>
-                <div>клиника</div>
+                    <div>Круглосуточная</div>
+                    <div>ветеринарная</div>
+                    <div>клиника</div>
                 </label>
                 <label className='labeltext'>
-                <div>Работаем со всеми видами животных.</div>
-                <div>В штабе работают врачи с большим опытом работы с кошками, собаками, </div>
-                <div>а также экзотическими животными. </div>
+                    <div>Работаем со всеми видами животных.</div>
+                    <div>В штабе работают врачи с большим опытом работы с кошками, собаками, </div>
+                    <div>а также экзотическими животными. </div>
                 </label>
                 <div className='RecordButton' onClick={() => setModalActive(true)}>
                     <div>
-                        Записаться на приём 
+                        Записаться на приём
                     </div>
                 </div>
-                <Modal active={modalActive} setActive={setModalActive}  >
-                    <div className="conteiner">
-                        <div className="form">
-                        <h1>Запись</h1>
-                        <form className='formRecord' onSubmit={handleSubmit}>
-                            <input
-                                type="text"
-                                required
-                                placeholder="Имя"
-                                id="name1"
-                                className="input"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            <input
-                                type="text"
-                                required
-                                placeholder="Номер телефона"
-                                id="tel"
-                                className="input"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                            />
-                            <input
-                                type="text"
-                                required
-                                placeholder="ID Ветеринара"
-                                id="vetId"
-                                className="input"
-                                value={veterinarianId}
-                                onChange={(e) => setVeterinarianId(e.target.value)}
-                            />
-                            <button id="btn" type="submit" >Записаться</button>
+                <Modal open={modalActive} onClose={() => setModalActive(false)}>
+                    <Paper sx={{
+                        width: 300,
+                        p: 4,
+                        m: 'auto',
+                        mt: '15%',
+                        borderRadius: 5,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                        <Typography variant="h5" sx={{ mb: 3 }}>Запись</Typography>
+                        <form onSubmit={handleSubmit}>
+                            <Stack spacing={2}>
+                                <TextField
+                                    label="Имя"
+                                    required
+                                    fullWidth
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                                <TextField
+                                    label="Номер телефона"
+                                    required
+                                    fullWidth
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                />
+                                <TextField
+                                    label="ID Ветеринара"
+                                    required
+                                    fullWidth
+                                    value={veterinarianId}
+                                    onChange={(e) => setVeterinarianId(e.target.value)}
+                                />
+                                <Button type="submit" variant="contained" fullWidth sx={{ backgroundColor: 'green' }}>
+                                    Записаться
+                                </Button>
+                            </Stack>
                         </form>
-                    </div>
-                </div>
-            </Modal>
+                    </Paper>
+                </Modal>
+            </div>
         </div>
-    </div>
-  )
+    )
 }

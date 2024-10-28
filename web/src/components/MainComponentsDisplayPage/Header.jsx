@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
+import {AppBar, Toolbar, Typography, Button, Box} from '@mui/material';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
 import Modal from './Modal';
-import {useAuth} from "../Authorization/AuthContext.tsx";
-import {AuthApi} from "../../json/api.ts";
+import { useAuth } from "../Authorization/AuthContext.tsx";
+import { AuthApi } from "../../json/api.ts";
 
 export default function Header() {
     const authApi = new AuthApi();
@@ -44,55 +45,49 @@ export default function Header() {
         }
     };
 
-
     return (
-        <div className="column">
-            <div className="header row">
-                <div className="headerleft">
-                    <div className="logo">
-                        <div>REKS</div>
-                    </div>
-                    <div className="flex-items item-1">
-                        <div className="item">
-                            <NavLink to="/">Про нас</NavLink>
-                        </div>
-                    </div>
-                    <div className="flex-items item-2">Отзывы</div>
-                    {isLoggedIn && (
-                        <>
-                            <div className="flex-items item-3">
-                                <div className="item">
-                                    <NavLink to="/veterinarians">Ветеринары</NavLink>
-                                </div>
-                            </div>
-                            <div className="flex-items item-1">
-                                <div className="item">
-                                    <NavLink to="/contact">Записи</NavLink>
-                                </div>
-                            </div>
-                        </>
-                    )}
-                    <div id="detail">
-                        <Outlet />
-                    </div>
-                </div>
-                <div className="headerright">
-                    <div className="flex-navigation item-4">
-                        <AiFillEnvironment className="styleIcons" /> Г.Томск ул.Елизаровых 74
-                    </div>
-                    <div className="flex-navigation item-5">
-                        <AiFillClockCircle className="styleIcons" /> Работаем круглосуточно
-                    </div>
-                    <div className="flex-navigation item-6">
-                        <AiFillPhone className="styleIcons" /> +7(950)-585-60-34
-                    </div>
-                    <div className="flex-navigation item-6">
-                        <div className="flex-items item-1" onClick={isLoggedIn ? logout : openModal}>
-                            {isLoggedIn ? `${userName}` : 'Вход'}
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <>
+            <AppBar position="static" sx={{ backgroundColor: 'rgb(19, 218, 191)' }}>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', padding: '0 20px'}}>
+                    <Typography variant="h4" component="div" sx={{ fontWeight: 'bold', marginRight: 2, fontSize: '2.5rem' }}>
+                        REKS
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Button color="inherit" component={NavLink} to="/" sx={{ fontSize: '1.25rem', marginRight: 3 }}>
+                            Про нас
+                        </Button>
+                        <Button color="inherit" component={NavLink} to="/reviews" sx={{ fontSize: '1.25rem', marginRight: 3 }}>
+                            Отзывы
+                        </Button>
+                        {isLoggedIn && (
+                            <>
+                                <Button color="inherit" component={NavLink} to="/veterinarians" sx={{ fontSize: '1.25rem', marginRight: 3 }}>
+                                    Ветеринары
+                                </Button>
+                                <Button color="inherit" component={NavLink} to="/contact" sx={{ fontSize: '1.25rem', marginRight: 3 }}>
+                                    Записи
+                                </Button>
+                            </>
+                        )}
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '1rem', color: 'inherit' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 3, fontSize: '1.1rem' }}>
+                            <AiFillEnvironment style={{ marginRight: '6px' }} /> Г.Томск ул.Елизаровых 74
+                        </Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 3, fontSize: '1.1rem' }}>
+                            <AiFillClockCircle style={{ marginRight: '6px' }} /> Работаем круглосуточно
+                        </Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', marginRight: 3, fontSize: '1.1rem' }}>
+                            <AiFillPhone style={{ marginRight: '6px' }} /> +7(950)-585-60-34
+                        </Box>
+                        <Button color="inherit" onClick={isLoggedIn ? logout : openModal} sx={{ fontSize: '1.25rem' }}>
+                            {isLoggedIn ? userName : 'Вход'}
+                        </Button>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+
+            {/* Modal for authentication */}
             <Modal active={modalIsOpen} setActive={setModalIsOpen}>
                 <h2>{isRegistering ? 'Регистрация' : 'Вход'}</h2>
                 <form onSubmit={handleAuth}>
@@ -104,13 +99,16 @@ export default function Header() {
                         <label htmlFor="password">Пароль:</label>
                         <input type="password" id="password" name="password" required />
                     </div>
-                    <button type="submit">{isRegistering ? 'Зарегистрироваться' : 'Войти'}</button>
+                    <Button variant="contained" color="primary" type="submit">
+                        {isRegistering ? 'Зарегистрироваться' : 'Войти'}
+                    </Button>
                 </form>
-                <button onClick={toggleRegistering}>
+                <Button onClick={toggleRegistering}>
                     {isRegistering ? 'Уже есть аккаунт? Войти' : 'Нет аккаунта? Зарегистрироваться'}
-                </button>
-                <button onClick={closeModal}>Закрыть</button>
+                </Button>
+                <Button onClick={closeModal}>Закрыть</Button>
             </Modal>
-        </div>
+            <Outlet />
+        </>
     );
 }
