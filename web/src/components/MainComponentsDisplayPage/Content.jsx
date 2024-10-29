@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Typography, Button, TextField, Modal, Paper, Stack } from '@mui/material';
+import {Typography, Button, TextField, Modal, Paper, Stack, Dialog} from '@mui/material';
 import dog from '../../img/dogLast.jpeg';
 import { ClientApiFactory } from '../../json/api.ts';
 
@@ -75,16 +75,14 @@ export default function Content() {
                         Записаться на приём
                     </div>
                 </div>
-                <Modal open={modalActive} onClose={() => setModalActive(false)}>
+                <Dialog open={modalActive} onClose={() => setModalActive(false)}>
                     <Paper sx={{
                         width: 300,
-                        p: 4,
-                        m: 'auto',
-                        mt: '15%',
-                        borderRadius: 5,
+                        p: 2,
                         display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        borderRadius: '12px',
                     }}>
                         <Typography variant="h5" sx={{ mb: 3 }}>Запись</Typography>
                         <form onSubmit={handleSubmit}>
@@ -116,7 +114,7 @@ export default function Content() {
                             </Stack>
                         </form>
                     </Paper>
-                </Modal>
+                </Dialog>
             </div>
         </div>
     )

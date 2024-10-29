@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import {AppBar, Toolbar, Typography, Button, Box, TextField} from '@mui/material';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    Box,
+    TextField,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions
+} from '@mui/material';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
-import Modal from './Modal';
 import { useAuth } from "../Authorization/AuthContext.tsx";
 import { AuthApi } from "../../json/api.ts";
 
@@ -87,14 +97,11 @@ export default function Header() {
                 </Toolbar>
             </AppBar>
 
-            <Modal active={modalIsOpen} setActive={setModalIsOpen}>
+            <Dialog open={modalIsOpen} onClose={setModalIsOpen}>
                 <Box
                     sx={{
                         width: 400,
-                        bgcolor: 'background.paper',
-                        borderRadius: 2,
-                        boxShadow: 24,
-                        p: 4,
+                        p: 2,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -134,11 +141,8 @@ export default function Header() {
                     <Button onClick={toggleRegistering} sx={{ mt: 2 }}>
                         {isRegistering ? 'Уже есть аккаунт? Войти' : 'Нет аккаунта? Зарегистрироваться'}
                     </Button>
-                    <Button onClick={closeModal} sx={{ mt: 2 }}>
-                        Закрыть
-                    </Button>
                 </Box>
-            </Modal>
+            </Dialog>
             <Outlet />
         </>
     );
