@@ -1,6 +1,6 @@
 // @ts-ignore
 import React, { useEffect, useState } from 'react';
-import { Select, MenuItem } from '@material-ui/core';
+import { Select, MenuItem, FormControl, InputLabel, Box, Typography } from '@mui/material';
 // @ts-ignore
 import { ClientApi, Veterinarian } from '../json/api.ts';
 // @ts-ignore
@@ -54,13 +54,23 @@ const SelectVet: React.FC<SelectVetProps> = ({ clientId }) => {
     if (veterinarians.length === 0) return null;
 
     return (
-        <Select value={selectedVet?.id || ''} onChange={handleSelectChange}>
-            {veterinarians.map((vet) => (
-                <MenuItem key={vet.id} value={vet.id}>
-                    {vet.name}
-                </MenuItem>
-            ))}
-        </Select>
+        <Box display="flex" alignItems="center">
+            <FormControl variant="outlined" margin="normal" style={{ minWidth: 250 }}>
+                <InputLabel id="select-vet-label">Выберите ветеринара</InputLabel>
+                <Select
+                    labelId="select-vet-label"
+                    value={selectedVet?.id || ''}
+                    onChange={handleSelectChange}
+                    label="Выберите ветеринара"
+                >
+                    {veterinarians.map((vet) => (
+                        <MenuItem key={vet.id} value={vet.id}>
+                            {vet.name}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </Box>
     );
 };
 

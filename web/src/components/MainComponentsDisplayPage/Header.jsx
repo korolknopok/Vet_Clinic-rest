@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import {AppBar, Toolbar, Typography, Button, Box} from '@mui/material';
+import {AppBar, Toolbar, Typography, Button, Box, TextField} from '@mui/material';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
 import Modal from './Modal';
 import { useAuth } from "../Authorization/AuthContext.tsx";
@@ -87,26 +87,57 @@ export default function Header() {
                 </Toolbar>
             </AppBar>
 
-            {/* Modal for authentication */}
             <Modal active={modalIsOpen} setActive={setModalIsOpen}>
-                <h2>{isRegistering ? 'Регистрация' : 'Вход'}</h2>
-                <form onSubmit={handleAuth}>
-                    <div>
-                        <label htmlFor="login">Логин:</label>
-                        <input type="text" id="login" name="login" required />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Пароль:</label>
-                        <input type="password" id="password" name="password" required />
-                    </div>
-                    <Button variant="contained" color="primary" type="submit">
-                        {isRegistering ? 'Зарегистрироваться' : 'Войти'}
+                <Box
+                    sx={{
+                        width: 400,
+                        bgcolor: 'background.paper',
+                        borderRadius: 2,
+                        boxShadow: 24,
+                        p: 4,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Typography variant="h5" component="h2" gutterBottom>
+                        {isRegistering ? 'Регистрация' : 'Вход'}
+                    </Typography>
+                    <form onSubmit={handleAuth} style={{ width: '100%' }}>
+                        <TextField
+                            label="Логин"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            name="login"
+                            required
+                        />
+                        <TextField
+                            label="Пароль"
+                            type="password"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            name="password"
+                            required
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            fullWidth
+                            sx={{ mt: 2 }}
+                        >
+                            {isRegistering ? 'Зарегистрироваться' : 'Войти'}
+                        </Button>
+                    </form>
+                    <Button onClick={toggleRegistering} sx={{ mt: 2 }}>
+                        {isRegistering ? 'Уже есть аккаунт? Войти' : 'Нет аккаунта? Зарегистрироваться'}
                     </Button>
-                </form>
-                <Button onClick={toggleRegistering}>
-                    {isRegistering ? 'Уже есть аккаунт? Войти' : 'Нет аккаунта? Зарегистрироваться'}
-                </Button>
-                <Button onClick={closeModal}>Закрыть</Button>
+                    <Button onClick={closeModal} sx={{ mt: 2 }}>
+                        Закрыть
+                    </Button>
+                </Box>
             </Modal>
             <Outlet />
         </>

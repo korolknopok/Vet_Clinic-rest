@@ -110,7 +110,7 @@ export default function Content() {
                                     value={veterinarianId}
                                     onChange={(e) => setVeterinarianId(e.target.value)}
                                 />
-                                <Button type="submit" variant="contained" fullWidth sx={{ backgroundColor: 'green' }}>
+                                <Button type="submit" variant="contained" fullWidth sx={{ backgroundColor: 'rgb(19, 218, 191)' }}>
                                     Записаться
                                 </Button>
                             </Stack>
