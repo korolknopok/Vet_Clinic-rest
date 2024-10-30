@@ -1,6 +1,9 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import {Typography, Button, TextField, Modal, Paper, Stack, Dialog} from '@mui/material';
+// @ts-ignore
 import dog from '../../img/dogLast.jpeg';
+// @ts-ignore
 import { ClientApiFactory } from '../../json/api.ts';
 
 export default function Content() {
@@ -17,13 +20,13 @@ export default function Content() {
         const data = {
             name: name,
             phoneNumber: phoneNumber,
-            vetId: veterinarianId,
+            vetId: parseInt(veterinarianId),
             vet: {
-                id: 0, // Здесь может быть динамическое значение или же передавайте 0
-                name: "", // Добавьте имя или оставьте пустым
-                dateOfBirth: "", // Можете указать примерную дату или оставить пустым
-                phoneNumber: "", // Введите номер телефона или оставьте пустым
-                education: "" // Можете указать или оставить пустым
+                id: 0,
+                name: "",
+                dateOfBirth: "",
+                phoneNumber: "",
+                education: ""
             }
         };
 
@@ -38,9 +41,8 @@ export default function Content() {
         };
 
         f.apiClientPost(data)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
+            .then(response => {
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Error:', error);

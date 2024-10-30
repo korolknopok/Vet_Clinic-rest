@@ -1,13 +1,18 @@
 import * as React from "react";
-import Header from "./components/MainComponentsDisplayPage/Header.jsx";
-import Content from "./components/MainComponentsDisplayPage/Content";
 import './css/index.css';
-import Contact from "./routes/contact.jsx";
 import { Route, Routes } from 'react-router-dom';
-import IVeterinarians from "./components/FilesRelatedToVeterinarians/Veterinarians.tsx";
-import { VeterinariansProvider } from "./components/FilesRelatedToVeterinarians/VeterinariansContext.tsx";
+// @ts-ignore
+import Header from "./components/MainComponentsDisplayPage/Header.tsx";
+// @ts-ignore
 import {AuthProvider} from "./components/Authorization/AuthContext.tsx";
-
+// @ts-ignore
+import {VeterinariansProvider} from "./components/FilesRelatedToVeterinarians/VeterinariansContext.tsx";
+// @ts-ignore
+import Content from "./components/MainComponentsDisplayPage/Content.tsx";
+// @ts-ignore
+import IVeterinarians from "./components/FilesRelatedToVeterinarians/Veterinarians.tsx";
+// @ts-ignore
+import Contact from "./routes/contact.tsx";
 
 export default function App() {
     return (

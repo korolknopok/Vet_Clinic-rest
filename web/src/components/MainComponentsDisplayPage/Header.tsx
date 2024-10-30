@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import {
@@ -13,7 +14,9 @@ import {
     DialogActions
 } from '@mui/material';
 import { AiFillClockCircle, AiFillPhone, AiFillEnvironment } from 'react-icons/ai';
+// @ts-ignore
 import { useAuth } from "../Authorization/AuthContext.tsx";
+// @ts-ignore
 import { AuthApi } from "../../json/api.ts";
 
 export default function Header() {
@@ -30,8 +33,8 @@ export default function Header() {
         event.preventDefault();
         const formData = new FormData(event.target);
         const authData = {
-            login: formData.get('login'),
-            password: formData.get('password'),
+            login: formData.get('login') as string,
+            password: formData.get('password') as string,
         };
         try {
             let response;
