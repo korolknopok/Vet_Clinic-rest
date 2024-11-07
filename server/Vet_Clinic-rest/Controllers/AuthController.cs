@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Vet_Clinic_rest.Context;
@@ -29,13 +29,9 @@ namespace Vet_Clinic_rest.Controllers
                     return Conflict("User with this login already exists.");
                 }
 
-                
-                var passwordHash = BCrypt.Net.BCrypt.HashPassword(loginDto.Password);
-
                 var newUser = new User
                 {
                     Login = loginDto.Login,
-                    Password = passwordHash
                 };
 
                 _context.User.Add(newUser);
@@ -58,13 +54,6 @@ namespace Vet_Clinic_rest.Controllers
             {
                 return Unauthorized("Invalid login or password.");
             }
-
-            // Проверка хэша пароля
-            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
-            {
-                return Unauthorized("Invalid login or password.");
-            }
-
             // Логика успешного входа
             return Ok(new { message = "Login successful" });
         }
