@@ -13,6 +13,8 @@ import Content from "./components/MainComponentsDisplayPage/Content.tsx";
 import IVeterinarians from "./components/FilesRelatedToVeterinarians/Veterinarians.tsx";
 // @ts-ignore
 import Contact from "./routes/contact.tsx";
+// @ts-ignore
+import Review from "./components/Review.tsx";
 
 export default function App() {
     return (
@@ -22,6 +24,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Content />} />
                     <Route path="/veterinarians" element={<IVeterinarians />} />
+                    <Route path = "/reviews" element={<Review />} />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
             </VeterinariansProvider>

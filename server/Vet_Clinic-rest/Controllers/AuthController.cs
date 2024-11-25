@@ -32,8 +32,9 @@ namespace Vet_Clinic_rest.Controllers
                 var newUser = new User
                 {
                     Login = loginDto.Login,
+                    Password = BCrypt.Net.BCrypt.HashPassword(loginDto.Password)
                 };
-
+                
                 _context.User.Add(newUser);
                 await _context.SaveChangesAsync();
 
@@ -42,7 +43,7 @@ namespace Vet_Clinic_rest.Controllers
             catch (Exception ex)
             {
                 // Логирование ошибки
-                return StatusCode(500, "Failed to register user: " + ex.Message);
+                return StatusCode(500, "Failed to register user: " + ex.InnerException?.Message ?? ex.Message);
             }
         }
 

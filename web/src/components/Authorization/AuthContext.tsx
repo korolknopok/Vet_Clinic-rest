@@ -76,7 +76,6 @@ export const useAuth = (): AuthContextType => {
     return context;
 };
 
-// Пример использования в компоненте
 const LoginComponent: React.FC = () => {
     const { login } = useAuth();
     const [userName, setUserName] = useState('');

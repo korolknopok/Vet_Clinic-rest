@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+// @ts-ignore
 import React from 'react'
+// @ts-ignore
 import ClientInfo from "../components/ClientInfo.tsx";
+// @ts-ignore
 import {ClientApiFactory } from '../json/api.ts';
 
 var f = ClientApiFactory(); 

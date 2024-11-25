@@ -10,7 +10,7 @@ export default function Content() {
     const [modalActive, setModalActive] = useState(false);
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [veterinarianId, setVeterinarianId] = useState("");
+    const [veterinarianId, setVeterinarianId] = useState(0);
 
     let f = ClientApiFactory();
 
@@ -20,7 +20,7 @@ export default function Content() {
         const data = {
             name: name,
             phoneNumber: phoneNumber,
-            vetId: parseInt(veterinarianId),
+            vetId: veterinarianId,
             vet: {
                 id: 0,
                 name: "",
@@ -28,16 +28,6 @@ export default function Content() {
                 phoneNumber: "",
                 education: ""
             }
-        };
-
-        const options = {
-
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-
-            },
-            body: JSON.stringify(data),
         };
 
         f.apiClientPost(data)
@@ -103,14 +93,8 @@ export default function Content() {
                                     value={phoneNumber}
                                     onChange={(e) => setPhoneNumber(e.target.value)}
                                 />
-                                <TextField
-                                    label="ID Ветеринара"
-                                    required
-                                    fullWidth
-                                    value={veterinarianId}
-                                    onChange={(e) => setVeterinarianId(e.target.value)}
-                                />
-                                <Button type="submit" variant="contained" fullWidth sx={{ backgroundColor: 'rgb(19, 218, 191)' }}>
+                                <Button type="submit" variant="contained" fullWidth
+                                        sx={{backgroundColor: 'rgb(19, 218, 191)'}}>
                                     Записаться
                                 </Button>
                             </Stack>
