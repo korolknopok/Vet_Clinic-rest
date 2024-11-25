@@ -16,7 +16,7 @@ interface VeterinariansInfo {
 
 const VeterinariansInfo: React.FC<VeterinariansInfo> = ({handleDeleteVetData , post, setIsOpen, open}) =>  {
     return (
-        <div>
+        <div style={{marginLeft: 25}}>
             {post.name}, {post.dateOfBirth}, {post.phoneNumber}, {post.education}
             <TiDelete className='styleIcons' onClick={() => {
                 handleDeleteVetData(post.id);

@@ -27,10 +27,10 @@ const ClientInfo: React.FC<IClientInfo> = ({ handleDeleteData, post }) => {
     };
 
     return (
-        <div>
+        <div style={{marginTop: '5px', marginLeft: '10px'}}>
             {post?.name}, {post?.phoneNumber}
-            <SelectVet clientId={post.id} />
             <TiDelete className='styleIcons' onClick={() => handleDelete(post.id)} />
+            <SelectVet clientId={post.id} />
         </div>
     );
 };

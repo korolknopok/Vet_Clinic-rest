@@ -47,7 +47,9 @@ function IVeterinarians() {
     return (
         <div>
             {isLoggedIn && <VeterInfoPost post={data} />}
-            Список ветеринаров:
+            <div style  = {{marginLeft: 25}}>
+                Список ветеринаров:
+            </div>
             <div>
                 {data.map(post => (
                     <div key={post.id}>
